@@ -1,4 +1,4 @@
-package com.example.ballet_for_all_flutter
+package com.wongeunjeon.balletforallapp
 
 import io.flutter.embedding.android.FlutterActivity
 

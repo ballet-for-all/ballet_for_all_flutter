@@ -24,12 +24,6 @@ class MyHomePage extends StatefulWidget {
 
   final String title;
 
-  void aaa(dynamic para) {
-    if (para == null) {
-      return;
-    } else {}
-  }
-
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
