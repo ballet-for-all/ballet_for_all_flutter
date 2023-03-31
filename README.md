@@ -43,3 +43,23 @@ Firebase 설정에 필요한 파일은 모두의 발레 구글 드라이브 개�
 ```bash
   $ fvm flutter run
 ```
+
+## 배포
+
+현재는 Firebase CLI 를 사용하여 내부 배포만 진행합니다.
+관련한 세팅은 [Firebase 앱 배포 페이지](https://firebase.google.com/docs/app-distribution?authuser=0&hl=ko)
+를 참조하시기 바랍니다.
+
+### Android
+
+```bash
+  $ fvm flutter build apk
+  $ firebase appdistribution:distribute build/app/outputs/flutter-apk/app-release.apk \
+  --app $(cat android/app/google-services.json | jq -r '.client[0].client_info.mobilesdk_app_id')
+```
+
+### iOS
+
+iOS 빌드는 개발자 계정이 필요합니다.
+
+> TBD
