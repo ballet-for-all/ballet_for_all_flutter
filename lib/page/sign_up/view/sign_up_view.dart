@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class SignUpView extends StatelessWidget {
   const SignUpView({Key? key}) : super(key: key);
@@ -9,7 +10,16 @@ class SignUpView extends StatelessWidget {
           child: Container(
             width: double.infinity,
             padding: const EdgeInsets.symmetric(horizontal: 24),
-            color: Colors.black,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: const AssetImage('assets/images/background-image.png'),
+                fit: BoxFit.cover,
+                colorFilter: ColorFilter.mode(
+                  Colors.black.withOpacity(0.5),
+                  BlendMode.srcOver,
+                ),
+              ),
+            ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -27,12 +37,11 @@ class SignUpView extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 44),
-                Container(
+                SizedBox(
                   width: 130,
                   height: 130,
-                  decoration: const BoxDecoration(
-                    color: Colors.grey,
-                  ),
+                  // TODO(kimhokyung): 이름 텍스트를 포함한 SVG 파일로 변경
+                  child: SvgPicture.asset('assets/images/wings.svg'),
                 ),
                 const SizedBox(height: 116),
                 SizedBox(
@@ -47,7 +56,19 @@ class SignUpView extends StatelessWidget {
                         borderRadius: BorderRadius.zero,
                       ),
                     ),
-                    child: const Text('카카오 계정으로 로그인'),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          'assets/icons/kakao.png',
+                          width: 27,
+                          height: 27,
+                        ),
+                        const SizedBox(width: 8),
+                        const Text('카카오 계정으로 로그인'),
+                      ],
+                    ),
                   ),
                 ),
                 const SizedBox(height: 12),
@@ -63,7 +84,19 @@ class SignUpView extends StatelessWidget {
                         borderRadius: BorderRadius.zero,
                       ),
                     ),
-                    child: const Text('Apple ID로 로그인'),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          'assets/icons/apple.png',
+                          width: 27,
+                          height: 27,
+                        ),
+                        const SizedBox(width: 8),
+                        const Text('Apple ID로 로그인'),
+                      ],
+                    ),
                   ),
                 ),
               ],
