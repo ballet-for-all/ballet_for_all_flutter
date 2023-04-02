@@ -2,7 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class SignUpView extends StatelessWidget {
-  const SignUpView({Key? key}) : super(key: key);
+  const SignUpView({
+    required this.onKakaoLoginPressed,
+    required this.onAppleLoginPressed,
+    Key? key,
+  }) : super(key: key);
+
+  final VoidCallback onKakaoLoginPressed;
+  final VoidCallback onAppleLoginPressed;
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -48,7 +55,7 @@ class SignUpView extends StatelessWidget {
                   width: double.infinity,
                   height: 60,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: onKakaoLoginPressed,
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.black,
                       backgroundColor: Colors.yellow,
@@ -76,7 +83,7 @@ class SignUpView extends StatelessWidget {
                   width: double.infinity,
                   height: 60,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: onAppleLoginPressed,
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.black,
                       backgroundColor: Colors.white,
