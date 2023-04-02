@@ -73,7 +73,10 @@ class SignUpView extends StatelessWidget {
                           height: 27,
                         ),
                         const SizedBox(width: 8),
-                        const Text('카카오 계정으로 로그인'),
+                        const Text(
+                          '카카오 계정으로 로그인',
+                          style: TextStyle(fontSize: 16),
+                        ),
                       ],
                     ),
                   ),
@@ -101,7 +104,10 @@ class SignUpView extends StatelessWidget {
                           height: 27,
                         ),
                         const SizedBox(width: 8),
-                        const Text('Apple ID로 로그인'),
+                        const Text(
+                          'Apple ID로 로그인',
+                          style: TextStyle(fontSize: 16),
+                        ),
                       ],
                     ),
                   ),
