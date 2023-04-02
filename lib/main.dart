@@ -2,24 +2,26 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'firebase_options.dart';
-import 'page/sign_up/view/sign_up_page.dart';
+import 'router.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
-  ).then((_) => runApp(const MyApp()));
+  ).then((_) => runApp(MyApp()));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+
+  final _router = AppRouter();
 
   @override
-  Widget build(BuildContext context) => MaterialApp(
+  Widget build(BuildContext context) => MaterialApp.router(
         title: 'Flutter Demo',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const SignUpPage(),
+        routerConfig: _router.config(),
       );
 }
