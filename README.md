@@ -70,6 +70,6 @@ iOS 빌드는 개발자 계정이 필요합니다.
 Firebase 설정 후 아래 명령어를 실행합니다.
 
 ```bash
- $ fvm flutter build web
+ $ fvm flutter build web --web-renderer canvaskit
  $ firebase deploy
 ```
