@@ -47,7 +47,6 @@ class SignUpView extends StatelessWidget {
                 SizedBox(
                   width: 130,
                   height: 130,
-                  // TODO(kimhokyung): 이름 텍스트를 포함한 SVG 파일로 변경
                   child: SvgPicture.asset('assets/images/wings.svg'),
                 ),
                 const SizedBox(height: 116),

@@ -9,7 +9,14 @@ class AppRouter extends $AppRouter {
 
   @override
   final List<AutoRoute> routes = [
-    AutoRoute(page: SignUpRoute.page, path: '/'),
+    AutoRoute(
+      path: '/',
+      page: SignUpRouter.page,
+      children: [
+        AutoRoute(path: '', page: SignUpRoute.page),
+        AutoRoute(path: 'agree-terms', page: AgreeTermsRoute.page),
+      ],
+    ),
     AutoRoute(page: SignUp2Route.page),
   ];
 }
