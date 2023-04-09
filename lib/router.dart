@@ -17,6 +17,5 @@ class AppRouter extends $AppRouter {
         AutoRoute(path: 'agree-terms', page: AgreeTermsRoute.page),
       ],
     ),
-    AutoRoute(page: SignUp2Route.page),
   ];
 }
