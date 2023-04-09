@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import 'login_button.dart';
+
 class SignUpView extends StatelessWidget {
   const SignUpView({
     required this.onKakaoLoginPressed,
@@ -28,88 +30,52 @@ class SignUpView extends StatelessWidget {
                 ),
               ),
             ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  child: const Text(
-                    '매일\n우아해질\n당신을 위해',
-                    style: TextStyle(
-                      fontSize: 36,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
+            child: Stack(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 107, bottom: 80),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        child: const Text(
+                          '매일\n우아해질\n당신을 위해',
+                          style: TextStyle(
+                            fontSize: 36,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                      Column(
+                        children: [
+                          LoginButton(
+                            onPressed: onKakaoLoginPressed,
+                            backgroundColor: const Color(0xFFFDE500),
+                            iconPath: 'assets/icons/kakao.png',
+                            label: '카카오 계정으로 로그인',
+                          ),
+                          const SizedBox(height: 12),
+                          LoginButton(
+                            onPressed: onAppleLoginPressed,
+                            backgroundColor: Colors.white,
+                            iconPath: 'assets/icons/apple.png',
+                            label: 'Apple ID로 로그인',
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
-                const SizedBox(height: 44),
-                SizedBox(
-                  width: 130,
-                  height: 130,
-                  child: SvgPicture.asset('assets/images/wings.svg'),
-                ),
-                const SizedBox(height: 116),
-                SizedBox(
-                  width: double.infinity,
-                  height: 60,
-                  child: ElevatedButton(
-                    onPressed: onKakaoLoginPressed,
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.black,
-                      backgroundColor: Colors.yellow,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.zero,
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          'assets/icons/kakao.png',
-                          width: 27,
-                          height: 27,
-                        ),
-                        const SizedBox(width: 8),
-                        const Text(
-                          '카카오 계정으로 로그인',
-                          style: TextStyle(fontSize: 16),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 12),
-                SizedBox(
-                  width: double.infinity,
-                  height: 60,
-                  child: ElevatedButton(
-                    onPressed: onAppleLoginPressed,
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.black,
-                      backgroundColor: Colors.white,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.zero,
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          'assets/icons/apple.png',
-                          width: 27,
-                          height: 27,
-                        ),
-                        const SizedBox(width: 8),
-                        const Text(
-                          'Apple ID로 로그인',
-                          style: TextStyle(fontSize: 16),
-                        ),
-                      ],
-                    ),
+                Align(
+                  alignment: Alignment.center,
+                  child: SizedBox(
+                    width: 130,
+                    height: 130,
+                    child: SvgPicture.asset('assets/images/wings.svg'),
                   ),
                 ),
               ],
