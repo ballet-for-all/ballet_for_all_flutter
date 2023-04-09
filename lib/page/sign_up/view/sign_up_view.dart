@@ -13,7 +13,8 @@ class SignUpView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        body: SafeArea(
+        body: Padding(
+          padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
           child: Container(
             width: double.infinity,
             padding: const EdgeInsets.symmetric(horizontal: 24),

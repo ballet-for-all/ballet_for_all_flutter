@@ -21,6 +21,12 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         theme: ThemeData(
           primarySwatch: Colors.blue,
+          appBarTheme: const AppBarTheme(
+            backgroundColor: Colors.white,
+            foregroundColor: Color(0xFF222222),
+            elevation: 0,
+          ),
+          scaffoldBackgroundColor: const Color(0xFFFFFFFF),
         ),
         routerConfig: _router.config(),
       );
