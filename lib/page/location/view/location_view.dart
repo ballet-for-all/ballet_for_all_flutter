@@ -1,7 +1,28 @@
 import 'package:flutter/material.dart';
 
 class LocationView extends StatelessWidget {
-  const LocationView({Key? key}) : super(key: key);
+  const LocationView({
+    required this.cities,
+    required this.districts,
+    required this.blocks,
+    required this.selectedCity,
+    required this.selectedDistrict,
+    required this.selectedBlock,
+    required this.onCitySelected,
+    required this.onDistrictSelected,
+    required this.onBlockSelected,
+    Key? key,
+  }) : super(key: key);
+
+  final List<String> cities;
+  final List<String> districts;
+  final List<String> blocks;
+  final int? selectedCity;
+  final int? selectedDistrict;
+  final int? selectedBlock;
+  final Function(int) onCitySelected;
+  final Function(int) onDistrictSelected;
+  final Function(int) onBlockSelected;
 
   @override
   Widget build(BuildContext context) => Scaffold(
