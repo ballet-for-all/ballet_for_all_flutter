@@ -62,7 +62,11 @@ Firebase 설정에 필요한 파일은 모두의 발레 구글 드라이브 개�
 
 iOS 빌드는 개발자 계정이 필요합니다.
 
-> TBD
+```bash
+  $ fvm flutter build ipa && fvm flutter build ipa --export-options-plist="build/ios/archive/Runner.xcarchive/Info.plist"
+  $ firebase appdistribution:distribute build/ios/ipa/ballet_for_all_flutter.ipa  \
+    --app $(/usr/libexec/PlistBuddy -c "Print GOOGLE_APP_ID" ios/Runner/GoogleService-Info.plist)
+```
 
 ### Web
 
