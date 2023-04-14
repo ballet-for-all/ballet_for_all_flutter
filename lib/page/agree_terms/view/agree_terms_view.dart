@@ -3,7 +3,12 @@ import 'package:flutter/material.dart';
 import 'term_item.dart';
 
 class AgreeTermsView extends StatelessWidget {
-  const AgreeTermsView({Key? key}) : super(key: key);
+  const AgreeTermsView({
+    required this.onSignUpClicked,
+    Key? key,
+  }) : super(key: key);
+
+  final VoidCallback onSignUpClicked;
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +55,7 @@ class AgreeTermsView extends StatelessWidget {
                     children: [
                       TermItem(
                         text: '서비스 이용약관 전체 동의',
-                        textStyle: (_termTextStyle as TextStyle).copyWith(
+                        textStyle: _termTextStyle.copyWith(
                           color: const Color(0xFF333333),
                           fontWeight: FontWeight.w500,
                         ),
@@ -117,7 +122,7 @@ class AgreeTermsView extends StatelessWidget {
                 elevation: 0,
                 padding: EdgeInsets.only(bottom: safePaddingBottom),
               ),
-              onPressed: () {},
+              onPressed: onSignUpClicked,
               child: const Text(
                 '가입하기',
                 style: TextStyle(
