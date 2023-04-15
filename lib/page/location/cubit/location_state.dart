@@ -5,17 +5,17 @@ class LocationState extends Equatable {
     this.cities = const [],
     this.districts = const [],
     this.blocks = const [],
-    this.selectedCity,
-    this.selectedDistrict,
-    this.selectedBlock,
+    this.selectedCity = -1,
+    this.selectedDistrict = -1,
+    this.selectedBlock = -1,
   });
 
   final List<String> cities;
   final List<String> districts;
   final List<String> blocks;
-  final int? selectedCity;
-  final int? selectedDistrict;
-  final int? selectedBlock;
+  final int selectedCity;
+  final int selectedDistrict;
+  final int selectedBlock;
 
   LocationState copyWith({
     List<String>? cities,
@@ -29,13 +29,13 @@ class LocationState extends Equatable {
         cities: cities ?? this.cities,
         districts: districts ?? this.districts,
         blocks: blocks ?? this.blocks,
-        selectedCity: selectedCity,
-        selectedDistrict: selectedDistrict,
-        selectedBlock: selectedBlock,
+        selectedCity: selectedCity ?? this.selectedCity,
+        selectedDistrict: selectedDistrict ?? this.selectedDistrict,
+        selectedBlock: selectedBlock ?? this.selectedBlock,
       );
 
   @override
-  List<Object?> get props => [
+  List<Object> get props => [
         cities,
         districts,
         blocks,

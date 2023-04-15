@@ -53,12 +53,14 @@ class TermItem extends StatelessWidget {
           if (infoUrl != null)
             InkWell(
               onTap: () {
-                // TODO(kimhokyung): Implement this.
+                // TODO(ghrud92): Implement this.
               },
-              child: Text('보기',
-                  style: textStyle.copyWith(
-                    decoration: TextDecoration.underline,
-                  )),
+              child: Text(
+                '보기',
+                style: textStyle.copyWith(
+                  decoration: TextDecoration.underline,
+                ),
+              ),
             ),
         ],
       ),
