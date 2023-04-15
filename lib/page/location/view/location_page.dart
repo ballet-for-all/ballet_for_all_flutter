@@ -23,6 +23,7 @@ class LocationPage extends StatelessWidget {
             selectedCity: state.selectedCity,
             selectedDistrict: state.selectedDistrict,
             selectedBlock: state.selectedBlock,
+            initializeData: cubit.initialize,
             onCitySelected: cubit.selectCity,
             onDistrictSelected: cubit.selectDistrict,
             onBlockSelected: cubit.selectBlock,

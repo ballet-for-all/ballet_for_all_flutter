@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
-class LocationView extends StatelessWidget {
+import '../../../shared/widget/safe_bottom_button.dart';
+import 'location_list_item.dart';
+
+class LocationView extends StatefulWidget {
   const LocationView({
     required this.cities,
     required this.districts,
@@ -8,6 +11,7 @@ class LocationView extends StatelessWidget {
     required this.selectedCity,
     required this.selectedDistrict,
     required this.selectedBlock,
+    required this.initializeData,
     required this.onCitySelected,
     required this.onDistrictSelected,
     required this.onBlockSelected,
@@ -17,12 +21,26 @@ class LocationView extends StatelessWidget {
   final List<String> cities;
   final List<String> districts;
   final List<String> blocks;
-  final int? selectedCity;
-  final int? selectedDistrict;
-  final int? selectedBlock;
+  final int selectedCity;
+  final int selectedDistrict;
+  final int selectedBlock;
+  final VoidCallback initializeData;
   final Function(int) onCitySelected;
   final Function(int) onDistrictSelected;
   final Function(int) onBlockSelected;
+
+  @override
+  State<LocationView> createState() => _LocationViewState();
+}
+
+class _LocationViewState extends State<LocationView> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      widget.initializeData();
+    });
+  }
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -50,7 +68,7 @@ class LocationView extends StatelessWidget {
                   Expanded(
                     child: TextField(
                       onChanged: (text) {
-                        // TODO(kimhokyung): 동네 검색
+                        // TODO(ghrud92): 동네 검색
                       },
                       style: const TextStyle(
                         color: Color(0xFF222222),
@@ -80,7 +98,7 @@ class LocationView extends StatelessWidget {
                   IconButton(
                     padding: EdgeInsets.zero,
                     onPressed: () {
-                      // TODO(kimhokyung): 위치 권한 요청 & 현재 위치로 동네 변경
+                      // TODO(ghrud92): 위치 권한 요청 & 현재 위치로 동네 변경
                     },
                     icon: Image.asset(
                       'assets/icons/location.png',
@@ -91,7 +109,65 @@ class LocationView extends StatelessWidget {
                 ],
               ),
             ),
-            // TODO(kimhokyung): 동네 리스트 UI
+            Expanded(
+              child: Row(
+                children: [
+                  Expanded(
+                    child: ListView.builder(
+                      itemBuilder: (context, i) {
+                        final city = widget.cities[i];
+                        return LocationListItem(
+                          text: city,
+                          selected: widget.selectedCity == i,
+                          onTap: () => widget.onCitySelected(i),
+                        );
+                      },
+                      itemCount: widget.cities.length,
+                    ),
+                  ),
+                  Expanded(
+                    child: ListView.builder(
+                      itemBuilder: (context, i) {
+                        final district = widget.districts[i];
+                        return LocationListItem(
+                          text: district,
+                          selected: widget.selectedDistrict == i,
+                          onTap: () => widget.onDistrictSelected(i),
+                        );
+                      },
+                      itemCount: widget.districts.length,
+                    ),
+                  ),
+                  Expanded(
+                    child: ListView.builder(
+                      itemBuilder: (context, i) {
+                        final block = widget.blocks[i];
+                        return LocationListItem(
+                          text: block,
+                          selected: widget.selectedBlock == i,
+                          onTap: () => widget.onBlockSelected(i),
+                        );
+                      },
+                      itemCount: widget.blocks.length,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SafeBottomButton(
+              onTap: widget.selectedBlock != -1
+                  ? () {
+                      // TODO(ghrud92): 동네 설정 완료
+                    }
+                  : null,
+              child: const Text(
+                '설정하기',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
           ],
         ),
       );
