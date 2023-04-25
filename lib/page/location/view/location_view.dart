@@ -45,6 +45,8 @@ class _LocationViewState extends State<LocationView> {
     });
   }
 
+  final _borderSide = const BorderSide(color: Color(0xFFCCCCCC), width: 1);
+
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
@@ -116,42 +118,57 @@ class _LocationViewState extends State<LocationView> {
               child: Row(
                 children: [
                   Expanded(
-                    child: ListView.builder(
-                      itemBuilder: (context, i) {
-                        final city = widget.cities[i];
-                        return LocationListItem(
-                          text: city.name,
-                          selected: widget.selectedCity == i,
-                          onTap: () => widget.onCitySelected(i),
-                        );
-                      },
-                      itemCount: widget.cities.length,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border(top: _borderSide, right: _borderSide),
+                      ),
+                      child: ListView.builder(
+                        itemBuilder: (context, i) {
+                          final city = widget.cities[i];
+                          return LocationListItem(
+                            text: city.name,
+                            selected: widget.selectedCity == i,
+                            onTap: () => widget.onCitySelected(i),
+                          );
+                        },
+                        itemCount: widget.cities.length,
+                      ),
                     ),
                   ),
                   Expanded(
-                    child: ListView.builder(
-                      itemBuilder: (context, i) {
-                        final district = widget.districts[i];
-                        return LocationListItem(
-                          text: district.name,
-                          selected: widget.selectedDistrict == i,
-                          onTap: () => widget.onDistrictSelected(i),
-                        );
-                      },
-                      itemCount: widget.districts.length,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border(top: _borderSide),
+                      ),
+                      child: ListView.builder(
+                        itemBuilder: (context, i) {
+                          final district = widget.districts[i];
+                          return LocationListItem(
+                            text: district.name,
+                            selected: widget.selectedDistrict == i,
+                            onTap: () => widget.onDistrictSelected(i),
+                          );
+                        },
+                        itemCount: widget.districts.length,
+                      ),
                     ),
                   ),
                   Expanded(
-                    child: ListView.builder(
-                      itemBuilder: (context, i) {
-                        final block = widget.blocks[i];
-                        return LocationListItem(
-                          text: block.name,
-                          selected: widget.selectedBlock == i,
-                          onTap: () => widget.onBlockSelected(i),
-                        );
-                      },
-                      itemCount: widget.blocks.length,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border(top: _borderSide, left: _borderSide),
+                      ),
+                      child: ListView.builder(
+                        itemBuilder: (context, i) {
+                          final block = widget.blocks[i];
+                          return LocationListItem(
+                            text: block.name,
+                            selected: widget.selectedBlock == i,
+                            onTap: () => widget.onBlockSelected(i),
+                          );
+                        },
+                        itemCount: widget.blocks.length,
+                      ),
                     ),
                   ),
                 ],
