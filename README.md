@@ -27,7 +27,7 @@ Firebase 설정에 필요한 파일은 모두의 발레 구글 드라이브 개�
 
 파일을 다운받아 아래 경로에 저장합니다.
 
-- `lib/config/firebase_config.dart`
+- `lib/firebase/firebase_options.dart`
 - `android/app/google-services.json`
 - `ios/firebase_app_id_file.json`
 - `ios/Runner/GoogleService-Info.plist`

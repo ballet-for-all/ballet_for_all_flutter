@@ -1,7 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'firebase_options.dart';
+import 'firebase/firebase_options.dart';
+import 'firebase/firestore_client.dart';
+import 'firebase/firestore_locations/firestore_locations_collection.dart';
+import 'repository/location/location_repository.dart';
 import 'router.dart';
 
 void main() {
@@ -17,17 +21,35 @@ class MyApp extends StatelessWidget {
   final _router = AppRouter();
 
   @override
-  Widget build(BuildContext context) => MaterialApp.router(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-          appBarTheme: const AppBarTheme(
-            backgroundColor: Colors.white,
-            foregroundColor: Color(0xFF222222),
-            elevation: 0,
+  Widget build(BuildContext context) => MultiRepositoryProvider(
+        providers: [
+          RepositoryProvider<FirestoreClient>(
+            create: (_) => FirestoreClient(),
           ),
-          scaffoldBackgroundColor: const Color(0xFFFFFFFF),
+          RepositoryProvider<FirestoreLocationsCollection>(
+            create: (context) => FirestoreLocationsCollection(
+              RepositoryProvider.of<FirestoreClient>(context),
+            ),
+          ),
+          RepositoryProvider<LocationRepository>(
+            create: (context) => LocationRepository(
+              collection:
+                  RepositoryProvider.of<FirestoreLocationsCollection>(context),
+            ),
+          ),
+        ],
+        child: MaterialApp.router(
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+            appBarTheme: const AppBarTheme(
+              backgroundColor: Colors.white,
+              foregroundColor: Color(0xFF222222),
+              elevation: 0,
+            ),
+            scaffoldBackgroundColor: const Color(0xFFFFFFFF),
+          ),
+          routerConfig: _router.config(),
         ),
-        routerConfig: _router.config(),
       );
 }
