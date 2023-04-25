@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../../repository/city/block.dart';
+import '../../../repository/city/city.dart';
+import '../../../repository/city/district.dart';
 import '../../../shared/widget/safe_bottom_button.dart';
 import 'location_list_item.dart';
 
@@ -18,9 +21,9 @@ class LocationView extends StatefulWidget {
     Key? key,
   }) : super(key: key);
 
-  final List<String> cities;
-  final List<String> districts;
-  final List<String> blocks;
+  final List<City> cities;
+  final List<District> districts;
+  final List<Block> blocks;
   final int selectedCity;
   final int selectedDistrict;
   final int selectedBlock;
@@ -117,7 +120,7 @@ class _LocationViewState extends State<LocationView> {
                       itemBuilder: (context, i) {
                         final city = widget.cities[i];
                         return LocationListItem(
-                          text: city,
+                          text: city.name,
                           selected: widget.selectedCity == i,
                           onTap: () => widget.onCitySelected(i),
                         );
@@ -130,7 +133,7 @@ class _LocationViewState extends State<LocationView> {
                       itemBuilder: (context, i) {
                         final district = widget.districts[i];
                         return LocationListItem(
-                          text: district,
+                          text: district.name,
                           selected: widget.selectedDistrict == i,
                           onTap: () => widget.onDistrictSelected(i),
                         );
@@ -143,7 +146,7 @@ class _LocationViewState extends State<LocationView> {
                       itemBuilder: (context, i) {
                         final block = widget.blocks[i];
                         return LocationListItem(
-                          text: block,
+                          text: block.name,
                           selected: widget.selectedBlock == i,
                           onTap: () => widget.onBlockSelected(i),
                         );

@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../repository/location/location_repository.dart';
+import '../../../repository/city/city_repository.dart';
 import '../cubit/location_cubit.dart';
 import '../cubit/location_state.dart';
 import 'location_view.dart';
@@ -14,7 +14,7 @@ class LocationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => BlocProvider<LocationCubit>(
       create: (_) => LocationCubit(
-            repository: context.read<LocationRepository>(),
+            repository: context.read<CityRepository>(),
           ),
       child: BlocBuilder<LocationCubit, LocationState>(
         builder: (context, state) {

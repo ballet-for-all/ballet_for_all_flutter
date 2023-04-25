@@ -5,7 +5,7 @@ import 'firestore_city.dart';
 
 part 'firestore_location.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class FirestoreLocation {
   FirestoreLocation({
     required this.id,
