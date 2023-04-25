@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'firestore_block.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class FirestoreBlock {
   FirestoreBlock({required this.name});
 

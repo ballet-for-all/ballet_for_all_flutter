@@ -1,21 +1,19 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'firestore_city.dart';
+part of 'city.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-FirestoreCity _$FirestoreCityFromJson(Map<String, dynamic> json) =>
-    FirestoreCity(
+City _$CityFromJson(Map<String, dynamic> json) => City(
       name: json['name'] as String,
       districts: (json['districts'] as List<dynamic>)
-          .map((e) => FirestoreDistrict.fromJson(e as Map<String, dynamic>))
+          .map((e) => District.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$FirestoreCityToJson(FirestoreCity instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$CityToJson(City instance) => <String, dynamic>{
       'name': instance.name,
       'districts': instance.districts.map((e) => e.toJson()).toList(),
     };

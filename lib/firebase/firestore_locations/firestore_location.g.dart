@@ -17,5 +17,5 @@ FirestoreLocation _$FirestoreLocationFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$FirestoreLocationToJson(FirestoreLocation instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'cities': instance.cities,
+      'cities': instance.cities.map((e) => e.toJson()).toList(),
     };

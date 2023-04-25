@@ -4,7 +4,7 @@ import 'firestore_block.dart';
 
 part 'firestore_district.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class FirestoreDistrict {
   FirestoreDistrict({required this.name, required this.blocks});
 

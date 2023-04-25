@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'firebase/firebase_options.dart';
 import 'firebase/firestore_client.dart';
 import 'firebase/firestore_locations/firestore_locations_collection.dart';
-import 'repository/location/location_repository.dart';
+import 'repository/city/city_repository.dart';
 import 'router.dart';
 
 void main() {
@@ -31,8 +31,8 @@ class MyApp extends StatelessWidget {
               RepositoryProvider.of<FirestoreClient>(context),
             ),
           ),
-          RepositoryProvider<LocationRepository>(
-            create: (context) => LocationRepository(
+          RepositoryProvider<CityRepository>(
+            create: (context) => CityRepository(
               collection:
                   RepositoryProvider.of<FirestoreLocationsCollection>(context),
             ),

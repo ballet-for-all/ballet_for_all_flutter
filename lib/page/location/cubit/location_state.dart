@@ -1,5 +1,9 @@
 import 'package:equatable/equatable.dart';
 
+import '../../../repository/city/block.dart';
+import '../../../repository/city/city.dart';
+import '../../../repository/city/district.dart';
+
 class LocationState extends Equatable {
   const LocationState({
     this.cities = const [],
@@ -10,17 +14,17 @@ class LocationState extends Equatable {
     this.selectedBlock = -1,
   });
 
-  final List<String> cities;
-  final List<String> districts;
-  final List<String> blocks;
+  final List<City> cities;
+  final List<District> districts;
+  final List<Block> blocks;
   final int selectedCity;
   final int selectedDistrict;
   final int selectedBlock;
 
   LocationState copyWith({
-    List<String>? cities,
-    List<String>? districts,
-    List<String>? blocks,
+    List<City>? cities,
+    List<District>? districts,
+    List<Block>? blocks,
     int? selectedCity,
     int? selectedDistrict,
     int? selectedBlock,
