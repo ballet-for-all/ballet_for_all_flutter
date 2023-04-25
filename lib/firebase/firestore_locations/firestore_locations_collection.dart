@@ -13,8 +13,7 @@ class FirestoreLocationsCollection {
                   firestoreLocation.toFirestore(),
             );
 
-  // TODO(ghrud92): 하나의 cities 정보만 저장하고 있으니 'location' 으로 변경
-  static const String _collectionName = 'locations';
+  static const String _collectionName = 'location';
   final CollectionReference<FirestoreLocation> _ref;
 
   Future<Map<String, dynamic>> getLocation() async {
