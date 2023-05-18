@@ -18,6 +18,7 @@ class LocationView extends StatefulWidget {
     required this.onCitySelected,
     required this.onDistrictSelected,
     required this.onBlockSelected,
+    required this.onConfirmLocation,
     Key? key,
   }) : super(key: key);
 
@@ -31,6 +32,7 @@ class LocationView extends StatefulWidget {
   final Function(int) onCitySelected;
   final Function(int) onDistrictSelected;
   final Function(int) onBlockSelected;
+  final VoidCallback onConfirmLocation;
 
   @override
   State<LocationView> createState() => _LocationViewState();
@@ -176,9 +178,7 @@ class _LocationViewState extends State<LocationView> {
             ),
             SafeBottomButton(
               onTap: widget.selectedBlock != -1
-                  ? () {
-                      // TODO(ghrud92): 동네 설정 완료
-                    }
+                  ? widget.onConfirmLocation
                   : null,
               child: const Text(
                 '설정하기',

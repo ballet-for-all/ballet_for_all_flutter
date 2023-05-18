@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../repository/city/city_repository.dart';
+import '../../../router.gr.dart';
 import '../cubit/location_cubit.dart';
 import '../cubit/location_state.dart';
 import 'location_view.dart';
@@ -30,6 +31,9 @@ class LocationPage extends StatelessWidget {
             onCitySelected: cubit.selectCity,
             onDistrictSelected: cubit.selectDistrict,
             onBlockSelected: cubit.selectBlock,
+            onConfirmLocation: () {
+              context.replaceRoute(const MainRouter());
+            },
           );
         },
       ));
