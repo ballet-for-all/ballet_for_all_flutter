@@ -18,11 +18,9 @@ import 'package:ballet_for_all_flutter/page/main/view/main_page.dart' as _i4;
 import 'package:ballet_for_all_flutter/page/sign_up/sign_up_router.dart' as _i5;
 import 'package:ballet_for_all_flutter/page/sign_up/view/sign_up_page.dart'
     as _i6;
-import 'package:flutter/material.dart' as _i8;
 
 abstract class $AppRouter extends _i7.RootStackRouter {
-  $AppRouter([_i8.GlobalKey<_i8.NavigatorState>? navigatorKey])
-      : super(navigatorKey);
+  $AppRouter({super.navigatorKey});
 
   @override
   final Map<String, _i7.PageFactory> pagesMap = {
