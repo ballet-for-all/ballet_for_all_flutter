@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
           ),
         ],
         child: MaterialApp.router(
-          title: 'Flutter Demo',
+          title: '모두의 발레',
           theme: ThemeData(
             primarySwatch: Colors.blue,
             appBarTheme: const AppBarTheme(
