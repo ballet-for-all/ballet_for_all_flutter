@@ -15,7 +15,6 @@ class AppRouter extends $AppRouter {
       page: SignUpRouter.page,
       children: [
         AutoRoute(path: '', page: SignUpRoute.page),
-        AutoRoute(path: 'agree-terms', page: AgreeTermsRoute.page),
         AutoRoute(path: 'location', page: LocationRoute.page),
       ],
     ),
