@@ -34,8 +34,20 @@ class MainView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      // TODO: 꾸미기
-                      Text(currentLocation),
+                      Row(
+                        children: [
+                          Text(
+                            currentLocation,
+                            style: const TextStyle(
+                              fontSize: 20,
+                              color: Color(0xFF222222),
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          const Icon(Icons.keyboard_arrow_down),
+                        ],
+                      ),
                       ElevatedButton(
                         onPressed: () {
                           // TODO(ghrud92): 디자인 적용 & 순서 변경 동작 구현
