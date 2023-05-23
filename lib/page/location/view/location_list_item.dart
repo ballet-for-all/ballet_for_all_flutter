@@ -27,7 +27,7 @@ class LocationListItem extends StatelessWidget {
               style: TextStyle(
                 color: selected ? Colors.white : const Color(0xFF999999),
                 fontSize: 15,
-                fontWeight: FontWeight.w500,
+                fontWeight: selected ? FontWeight.w500 : FontWeight.w300,
               ),
             ),
           ),
