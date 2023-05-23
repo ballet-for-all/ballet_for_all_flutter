@@ -10,7 +10,7 @@ class SignUpPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => SignUpView(
-        onKakaoLoginPressed: () => context.pushRoute(const AgreeTermsRoute()),
-        onAppleLoginPressed: () => context.pushRoute(const AgreeTermsRoute()),
+        onKakaoLoginPressed: () => context.pushRoute(const LocationRoute()),
+        onAppleLoginPressed: () => context.pushRoute(const LocationRoute()),
       );
 }
