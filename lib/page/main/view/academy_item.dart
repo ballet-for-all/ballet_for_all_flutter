@@ -1,8 +1,10 @@
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 
 import 'class_info.dart';
 
-class AcademyItem extends StatelessWidget {
+class AcademyItem extends StatefulWidget {
   const AcademyItem({
     // TODO(ghrud92): 실제 데이터 적용
     this.academyImages = const [
@@ -28,6 +30,21 @@ class AcademyItem extends StatelessWidget {
   final int pieceClassExtraNum;
 
   @override
+  State<AcademyItem> createState() => _AcademyItemState();
+}
+
+class _AcademyItemState extends State<AcademyItem> {
+  late final CarouselController _carouselController;
+
+  int _imageIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _carouselController = CarouselController();
+  }
+
+  @override
   Widget build(BuildContext context) => Padding(
         padding: const EdgeInsets.only(bottom: 16, left: 24, right: 24),
         child: InkWell(
@@ -36,14 +53,66 @@ class AcademyItem extends StatelessWidget {
           },
           child: Column(
             children: [
-              // TODO(ghrud92): 캐러셀 패키지 사용
-              SizedBox(
-                width: double.infinity,
-                height: 219,
-                child: Image.network(
-                  academyImages.first,
-                  fit: BoxFit.fitWidth,
-                ),
+              Stack(
+                children: [
+                  CarouselSlider.builder(
+                    carouselController: _carouselController,
+                    options: CarouselOptions(
+                      height: 219,
+                      viewportFraction: 1,
+                      enableInfiniteScroll: false,
+                      onPageChanged: (index, reason) => setState(() {
+                        _imageIndex = index;
+                      }),
+                    ),
+                    itemCount: widget.academyImages.length,
+                    itemBuilder: (context, index, realIndex) => SizedBox(
+                      width: double.infinity,
+                      child: Image.network(
+                        widget.academyImages[index],
+                        fit: BoxFit.fitWidth,
+                      ),
+                    ),
+                  ),
+                  Positioned.fill(
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: IconButton(
+                        icon: const Icon(
+                          Icons.chevron_left,
+                          color: Colors.white,
+                        ),
+                        onPressed: () => _carouselController.previousPage(),
+                      ),
+                    ),
+                  ),
+                  Positioned.fill(
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: IconButton(
+                        icon: const Icon(
+                          Icons.chevron_right,
+                          color: Colors.white,
+                        ),
+                        onPressed: () => _carouselController.nextPage(),
+                      ),
+                    ),
+                  ),
+                  Positioned.fill(
+                    bottom: 20,
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: DotsIndicator(
+                        dotsCount: widget.academyImages.length,
+                        position: _imageIndex,
+                        decorator: DotsDecorator(
+                          color: Colors.white.withOpacity(0.7),
+                          activeColor: const Color(0xFF222222),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
               Container(
                 color: Colors.white,
@@ -58,7 +127,7 @@ class AcademyItem extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                academyName,
+                                widget.academyName,
                                 style: const TextStyle(
                                   color: Color(0xFF333333),
                                   fontSize: 20,
@@ -67,7 +136,7 @@ class AcademyItem extends StatelessWidget {
                               ),
                               const SizedBox(height: 8),
                               Text(
-                                academyAddress,
+                                widget.academyAddress,
                                 style: const TextStyle(
                                   fontSize: 13,
                                   color: Color(0xFF999999),
@@ -90,14 +159,14 @@ class AcademyItem extends StatelessWidget {
                           child: ClassInfo(
                             title: '정규수업',
                             // TODO(ghrud92): 가격에 , 추가
-                            description: '회당 $regularPrice원~',
+                            description: '회당 ${widget.regularPrice}원~',
                           ),
                         ),
                         Expanded(
                           child: ClassInfo(
                             title: '쿠폰수업',
                             // TODO(ghrud92): 가격에 , 추가
-                            description: '회당 $couponPrice원~',
+                            description: '회당 ${widget.couponPrice}원~',
                           ),
                         ),
                       ],
@@ -105,7 +174,8 @@ class AcademyItem extends StatelessWidget {
                     const SizedBox(height: 12),
                     ClassInfo(
                       title: '작품수업',
-                      description: '$pieceClass 외 $pieceClassExtraNum개',
+                      description:
+                          '${widget.pieceClass} 외 ${widget.pieceClassExtraNum}개',
                     )
                   ],
                 ),
