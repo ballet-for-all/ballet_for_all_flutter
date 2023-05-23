@@ -19,6 +19,8 @@ dependencies:
   equatable: ^2.0.5
   cloud_firestore: ^4.5.1
   json_annotation: ^4.8.0
+  carousel_slider: ^4.2.1
+  dots_indicator: ^3.0.0
 
 dev_dependencies:
   flutter_test:
@@ -31,5 +33,5 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/icons/
-    - assets/images/
+  - assets/icons/
+  - assets/images/
