@@ -57,7 +57,7 @@ class _LocationViewState extends State<LocationView> {
             style: TextStyle(
               color: Color(0xFF333333),
               fontSize: 16,
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.w500,
             ),
           ),
           centerTitle: true,
@@ -177,9 +177,8 @@ class _LocationViewState extends State<LocationView> {
               ),
             ),
             SafeBottomButton(
-              onTap: widget.selectedBlock != -1
-                  ? widget.onConfirmLocation
-                  : null,
+              onTap:
+                  widget.selectedBlock != -1 ? widget.onConfirmLocation : null,
               child: const Text(
                 '설정하기',
                 style: TextStyle(

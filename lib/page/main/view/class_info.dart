@@ -12,11 +12,13 @@ class ClassInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.baseline,
+        textBaseline: TextBaseline.alphabetic,
         children: [
           Text(
             title,
             style: const TextStyle(
+              height: 1.17,
               fontSize: 13,
               color: Color(0xFF999999),
             ),
@@ -26,6 +28,7 @@ class ClassInfo extends StatelessWidget {
             child: Text(
               description,
               style: const TextStyle(
+                height: 1.17,
                 fontSize: 13,
                 color: Color(0xFF222222),
               ),

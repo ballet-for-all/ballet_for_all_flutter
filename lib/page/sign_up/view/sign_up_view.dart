@@ -45,7 +45,7 @@ class SignUpView extends StatelessWidget {
                           '매일\n우아해질\n당신을 위해',
                           style: TextStyle(
                             fontSize: 36,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w700,
                             color: Colors.white,
                           ),
                         ),

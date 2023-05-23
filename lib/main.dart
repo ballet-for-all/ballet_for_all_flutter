@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'auth/auth_cubit.dart';
 import 'firebase/firebase_options.dart';
@@ -51,6 +52,9 @@ class MyApp extends StatelessWidget {
                 elevation: 0,
               ),
               scaffoldBackgroundColor: const Color(0xFFFFFFFF),
+              textTheme: GoogleFonts.robotoTextTheme(
+                Theme.of(context).textTheme,
+              ),
             ),
             routerConfig: _router.config(),
           ),
