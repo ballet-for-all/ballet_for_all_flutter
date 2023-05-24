@@ -44,6 +44,10 @@ class MyApp extends StatelessWidget {
           create: (context) => AuthCubit(),
           child: MaterialApp.router(
             title: '모두의 발레',
+            builder: (context, router) => MediaQuery(
+              data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+              child: router!,
+            ),
             theme: ThemeData(
               primarySwatch: Colors.blue,
               appBarTheme: const AppBarTheme(
