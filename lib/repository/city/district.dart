@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'block.dart';
@@ -5,8 +6,8 @@ import 'block.dart';
 part 'district.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class District {
-  District({required this.name, required this.blocks});
+class District extends Equatable {
+  const District({required this.name, required this.blocks});
 
   factory District.fromJson(Map<String, dynamic> json) =>
       _$DistrictFromJson(json);
@@ -15,4 +16,7 @@ class District {
   final List<Block> blocks;
 
   Map<String, dynamic> toJson() => _$DistrictToJson(this);
+
+  @override
+  List<Object> get props => [name, blocks];
 }
