@@ -10,118 +10,13 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
+import '../../../helper/city_generator.dart';
 import 'location_cubit_test.mocks.dart';
 
 @GenerateMocks([CityRepository])
 void main() {
   group('LocationCubit', () {
     late MockCityRepository cityRepository;
-
-    final List<City> defaultCities = [
-      const City(
-        name: '서울특별시',
-        districts: [
-          District(
-            name: '강남구',
-            blocks: [
-              Block(name: '개포동'),
-              Block(name: '논현동'),
-            ],
-          ),
-          District(
-            name: '강동구',
-            blocks: [
-              Block(name: '강일동'),
-              Block(name: '고덕동'),
-            ],
-          ),
-        ],
-      ),
-      const City(
-        name: '부산광역시',
-        districts: [
-          District(
-            name: '강서구',
-            blocks: [
-              Block(name: '가덕도동'),
-              Block(name: '가락동'),
-            ],
-          ),
-          District(
-            name: '금정구',
-            blocks: [
-              Block(name: '가야동'),
-              Block(name: '가락동'),
-            ],
-          ),
-        ],
-      ),
-    ];
-
-    final List<City> defaultCitiesWithAll = [
-      const City(
-        name: '서울특별시',
-        districts: [
-          District(
-            name: '전체',
-            blocks: [
-              Block(name: '전체'),
-              Block(name: '개포동'),
-              Block(name: '논현동'),
-              Block(name: '강일동'),
-              Block(name: '고덕동'),
-            ],
-          ),
-          District(
-            name: '강남구',
-            blocks: [
-              Block(name: '전체'),
-              Block(name: '개포동'),
-              Block(name: '논현동'),
-            ],
-          ),
-          District(
-            name: '강동구',
-            blocks: [
-              Block(name: '전체'),
-              Block(name: '강일동'),
-              Block(name: '고덕동'),
-            ],
-          ),
-        ],
-      ),
-      const City(
-        name: '부산광역시',
-        districts: [
-          District(
-            name: '전체',
-            blocks: [
-              Block(name: '전체'),
-              Block(name: '가덕도동'),
-              Block(name: '가락동'),
-              Block(name: '가야동'),
-              Block(name: '가락동'),
-            ],
-          ),
-          District(
-            name: '강서구',
-            blocks: [
-              Block(name: '전체'),
-              Block(name: '가덕도동'),
-              Block(name: '가락동'),
-            ],
-          ),
-          District(
-            name: '금정구',
-            blocks: [
-              Block(name: '전체'),
-              Block(name: '가야동'),
-              Block(name: '가락동'),
-            ],
-          ),
-        ],
-      ),
-    ];
 
     setUp(() {
       EquatableConfig.stringify = true;
@@ -175,6 +70,42 @@ void main() {
         'repository에서 준 city 리스트에 "전체" 필드를 추가로 갖는 state를 방출한다.',
         build: () => LocationCubit(repository: cityRepository),
         setUp: () {
+          final defaultCities = [
+            const City(
+              name: '서울특별시',
+              districts: [
+                District(
+                  name: '강남구',
+                  blocks: [
+                    Block(name: '개포동'),
+                  ],
+                ),
+                District(
+                  name: '강동구',
+                  blocks: [
+                    Block(name: '강일동'),
+                  ],
+                ),
+              ],
+            ),
+            const City(
+              name: '부산광역시',
+              districts: [
+                District(
+                  name: '강서구',
+                  blocks: [
+                    Block(name: '가덕도동'),
+                  ],
+                ),
+                District(
+                  name: '금정구',
+                  blocks: [
+                    Block(name: '가야동'),
+                  ],
+                ),
+              ],
+            ),
+          ];
           when(cityRepository.listCities())
               .thenAnswer((_) async => defaultCities);
         },
@@ -182,10 +113,65 @@ void main() {
           await cubit.initialize();
         },
         expect: () => [
-          LocationState(
-            cities: defaultCitiesWithAll,
-            districts: const [],
-            blocks: const [],
+          const LocationState(
+            cities: [
+              City(
+                name: '서울특별시',
+                districts: [
+                  District(
+                    name: '전체',
+                    blocks: [
+                      Block(name: '전체'),
+                      Block(name: '개포동'),
+                      Block(name: '강일동'),
+                    ],
+                  ),
+                  District(
+                    name: '강남구',
+                    blocks: [
+                      Block(name: '전체'),
+                      Block(name: '개포동'),
+                    ],
+                  ),
+                  District(
+                    name: '강동구',
+                    blocks: [
+                      Block(name: '전체'),
+                      Block(name: '강일동'),
+                    ],
+                  ),
+                ],
+              ),
+              City(
+                name: '부산광역시',
+                districts: [
+                  District(
+                    name: '전체',
+                    blocks: [
+                      Block(name: '전체'),
+                      Block(name: '가덕도동'),
+                      Block(name: '가야동'),
+                    ],
+                  ),
+                  District(
+                    name: '강서구',
+                    blocks: [
+                      Block(name: '전체'),
+                      Block(name: '가덕도동'),
+                    ],
+                  ),
+                  District(
+                    name: '금정구',
+                    blocks: [
+                      Block(name: '전체'),
+                      Block(name: '가야동'),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+            districts: [],
+            blocks: [],
             selectedCity: -1,
             selectedDistrict: -1,
             selectedBlock: -1,
@@ -198,8 +184,9 @@ void main() {
     });
 
     group('selectCity', () {
+      final List<City> cities = [generateCity(), generateCity()];
       final LocationState defaultState = LocationState(
-        cities: defaultCitiesWithAll,
+        cities: cities,
         districts: const [],
         blocks: const [],
         selectedCity: -1,
@@ -216,8 +203,8 @@ void main() {
         },
         expect: () => [
           LocationState(
-            cities: defaultCitiesWithAll,
-            districts: defaultCitiesWithAll[0].districts,
+            cities: cities,
+            districts: cities[0].districts,
             blocks: const [],
             selectedCity: 0,
             selectedDistrict: -1,
@@ -240,8 +227,8 @@ void main() {
         skip: 1,
         expect: () => [
           LocationState(
-            cities: defaultCitiesWithAll,
-            districts: defaultCitiesWithAll[1].districts,
+            cities: cities,
+            districts: cities[1].districts,
             blocks: const [],
             selectedCity: 1,
             selectedDistrict: -1,
@@ -257,9 +244,9 @@ void main() {
         '0번째 city, 0번째 district, 0번째 block이 선택된 상태에서, 1번째 city가 선택되면, 1번째 city의 district 리스트를 갖고, block 리스트와 selectedDistrict, selectedBlock 정보가 초기화된 state를 방출한다.',
         build: () => LocationCubit(repository: cityRepository),
         seed: () => LocationState(
-          cities: defaultCitiesWithAll,
-          districts: defaultCitiesWithAll[0].districts,
-          blocks: defaultCitiesWithAll[0].districts[0].blocks,
+          cities: cities,
+          districts: cities[0].districts,
+          blocks: cities[0].districts[0].blocks,
           selectedCity: 0,
           selectedDistrict: 0,
           selectedBlock: 0,
@@ -269,8 +256,8 @@ void main() {
         },
         expect: () => [
           LocationState(
-            cities: defaultCitiesWithAll,
-            districts: defaultCitiesWithAll[1].districts,
+            cities: cities,
+            districts: cities[1].districts,
             blocks: const [],
             selectedCity: 1,
             selectedDistrict: -1,
@@ -284,9 +271,10 @@ void main() {
     });
 
     group('selectDistrict', () {
+      final List<City> cities = [generateCity(), generateCity()];
       final LocationState defaultState = LocationState(
-        cities: defaultCitiesWithAll,
-        districts: defaultCitiesWithAll[0].districts,
+        cities: cities,
+        districts: cities[0].districts,
         blocks: const [],
         selectedCity: 0,
         selectedDistrict: -1,
@@ -302,9 +290,9 @@ void main() {
         },
         expect: () => [
           LocationState(
-            cities: defaultCitiesWithAll,
-            districts: defaultCitiesWithAll[0].districts,
-            blocks: defaultCitiesWithAll[0].districts[0].blocks,
+            cities: cities,
+            districts: cities[0].districts,
+            blocks: cities[0].districts[0].blocks,
             selectedCity: 0,
             selectedDistrict: 0,
             selectedBlock: -1,
@@ -326,9 +314,9 @@ void main() {
         skip: 1,
         expect: () => [
           LocationState(
-            cities: defaultCitiesWithAll,
-            districts: defaultCitiesWithAll[0].districts,
-            blocks: defaultCitiesWithAll[0].districts[1].blocks,
+            cities: cities,
+            districts: cities[0].districts,
+            blocks: cities[0].districts[1].blocks,
             selectedCity: 0,
             selectedDistrict: 1,
             selectedBlock: -1,
@@ -343,9 +331,9 @@ void main() {
         '0번째 city, 0번째 district, 0번째 block이 선택된 상태에서, 1번째 district가 선택되면, 1번째 district 리스트를 갖고, block 리스트와 selectedBlock 정보가 초기화된 state를 방출한다.',
         build: () => LocationCubit(repository: cityRepository),
         seed: () => LocationState(
-          cities: defaultCitiesWithAll,
-          districts: defaultCitiesWithAll[0].districts,
-          blocks: defaultCitiesWithAll[0].districts[0].blocks,
+          cities: cities,
+          districts: cities[0].districts,
+          blocks: cities[0].districts[0].blocks,
           selectedCity: 0,
           selectedDistrict: 0,
           selectedBlock: 0,
@@ -355,9 +343,9 @@ void main() {
         },
         expect: () => [
           LocationState(
-            cities: defaultCitiesWithAll,
-            districts: defaultCitiesWithAll[0].districts,
-            blocks: defaultCitiesWithAll[0].districts[1].blocks,
+            cities: cities,
+            districts: cities[0].districts,
+            blocks: cities[0].districts[1].blocks,
             selectedCity: 0,
             selectedDistrict: 1,
             selectedBlock: -1,
@@ -370,10 +358,11 @@ void main() {
     });
 
     group('selectBlock', () {
+      final List<City> cities = [generateCity(), generateCity()];
       final LocationState defaultState = LocationState(
-        cities: defaultCitiesWithAll,
-        districts: defaultCitiesWithAll[0].districts,
-        blocks: defaultCitiesWithAll[0].districts[0].blocks,
+        cities: cities,
+        districts: cities[0].districts,
+        blocks: cities[0].districts[0].blocks,
         selectedCity: 0,
         selectedDistrict: 0,
         selectedBlock: -1,
@@ -388,9 +377,9 @@ void main() {
         },
         expect: () => [
           LocationState(
-            cities: defaultCitiesWithAll,
-            districts: defaultCitiesWithAll[0].districts,
-            blocks: defaultCitiesWithAll[0].districts[0].blocks,
+            cities: cities,
+            districts: cities[0].districts,
+            blocks: cities[0].districts[0].blocks,
             selectedCity: 0,
             selectedDistrict: 0,
             selectedBlock: 0,
@@ -412,9 +401,9 @@ void main() {
         skip: 1,
         expect: () => [
           LocationState(
-            cities: defaultCitiesWithAll,
-            districts: defaultCitiesWithAll[0].districts,
-            blocks: defaultCitiesWithAll[0].districts[0].blocks,
+            cities: cities,
+            districts: cities[0].districts,
+            blocks: cities[0].districts[0].blocks,
             selectedCity: 0,
             selectedDistrict: 0,
             selectedBlock: 1,
