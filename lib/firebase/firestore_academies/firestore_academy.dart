@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'firestore_academy_location.dart';
@@ -11,6 +12,7 @@ part 'firestore_academy.g.dart';
 @JsonSerializable(explicitToJson: true)
 class FirestoreAcademy {
   FirestoreAcademy({
+    required this.id,
     required this.name,
     required this.address,
     required this.phone,
@@ -27,6 +29,21 @@ class FirestoreAcademy {
   factory FirestoreAcademy.fromJson(Map<String, dynamic> json) =>
       _$FirestoreAcademyFromJson(json);
 
+  factory FirestoreAcademy.fromFirestore(
+    DocumentSnapshot<Map<String, dynamic>> snapshot,
+    SnapshotOptions? options,
+  ) {
+    final data = snapshot.data();
+    if (data == null) {
+      throw Exception('FirestoreAcademy is null');
+    }
+    return FirestoreAcademy.fromJson({
+      'id': snapshot.id,
+      ...data,
+    });
+  }
+
+  final String id;
   final String name;
   final String address;
   final List<String> phone;
@@ -41,9 +58,15 @@ class FirestoreAcademy {
 
   Map<String, dynamic> toJson() => _$FirestoreAcademyToJson(this);
 
+  Map<String, dynamic> toFirestore() {
+    final json = toJson();
+    json.remove('id');
+    return json;
+  }
+
   @override
   String toString() =>
-      'FirestoreAcademy{name: $name, address: $address, phone: $phone, sns: $sns, coupon: $coupon, '
-      'images: $images, teachers: $teachers, timetables: $timetables, pricing: $pricing, '
-      'pricingDescription: $pricingDescription, location: $location}';
+      'FirestoreAcademy{id: $id, name: $name, address: $address, phone: $phone, sns: $sns, '
+      'coupon: $coupon, images: $images, teachers: $teachers, timetables: $timetables, pricing: '
+      '$pricing, pricingDescription: $pricingDescription, location: $location}';
 }

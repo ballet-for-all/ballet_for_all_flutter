@@ -8,6 +8,7 @@ part of 'firestore_academy.dart';
 
 FirestoreAcademy _$FirestoreAcademyFromJson(Map<String, dynamic> json) =>
     FirestoreAcademy(
+      id: json['id'] as String,
       name: json['name'] as String,
       address: json['address'] as String,
       phone: (json['phone'] as List<dynamic>).map((e) => e as String).toList(),
@@ -31,6 +32,7 @@ FirestoreAcademy _$FirestoreAcademyFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$FirestoreAcademyToJson(FirestoreAcademy instance) =>
     <String, dynamic>{
+      'id': instance.id,
       'name': instance.name,
       'address': instance.address,
       'phone': instance.phone,
