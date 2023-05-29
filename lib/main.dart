@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'auth/auth_cubit.dart';
 import 'firebase/firebase_options.dart';
+import 'firebase/firestore_academies/firestore_academies_collection.dart';
 import 'firebase/firestore_client.dart';
 import 'firebase/firestore_locations/firestore_locations_collection.dart';
 import 'repository/city/city_repository.dart';
@@ -31,6 +32,11 @@ class MyApp extends StatelessWidget {
           ),
           RepositoryProvider<FirestoreLocationsCollection>(
             create: (context) => FirestoreLocationsCollection(
+              RepositoryProvider.of<FirestoreClient>(context),
+            ),
+          ),
+          RepositoryProvider<FirestoreAcademiesCollection>(
+            create: (context) => FirestoreAcademiesCollection(
               RepositoryProvider.of<FirestoreClient>(context),
             ),
           ),

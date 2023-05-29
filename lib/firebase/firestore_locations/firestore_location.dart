@@ -34,7 +34,11 @@ class FirestoreLocation {
 
   Map<String, dynamic> toJson() => _$FirestoreLocationToJson(this);
 
-  Map<String, dynamic> toFirestore() => {'cities': cities};
+  Map<String, dynamic> toFirestore() {
+    final json = toJson();
+    json.remove('id');
+    return json;
+  }
 
   @override
   String toString() => 'FirestoreLocation{id: $id, cities: $cities}';
