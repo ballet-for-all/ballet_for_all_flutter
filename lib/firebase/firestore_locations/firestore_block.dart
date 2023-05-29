@@ -11,7 +11,7 @@ class FirestoreBlock {
 
   Map<String, dynamic> toJson() => _$FirestoreBlockToJson(this);
 
-  String name;
+  final String name;
 
   @override
   String toString() => 'FirestoreBlock{name: $name}';
