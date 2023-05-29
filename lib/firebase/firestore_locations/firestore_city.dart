@@ -13,8 +13,8 @@ class FirestoreCity {
 
   Map<String, dynamic> toJson() => _$FirestoreCityToJson(this);
 
-  String name;
-  List<FirestoreDistrict> districts;
+  final String name;
+  final List<FirestoreDistrict> districts;
 
   @override
   String toString() => 'FirestoreCity{name: $name, districts: $districts}';
