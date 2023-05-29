@@ -12,7 +12,7 @@ class FirestorePricing {
     required this.plan,
     required this.originalPrice,
     required this.salePrice,
-    required this.discountRate,
+    required this.discountPercent,
   });
 
   factory FirestorePricing.fromJson(Map<String, dynamic> json) =>
@@ -20,12 +20,12 @@ class FirestorePricing {
 
   final int? numberPerWeek;
   final double? totalCount;
-  final int durationInMonth;
-  final int classTimeInMinutes;
+  final int? durationInMonth;
+  final int? classTimeInMinutes;
   final String plan;
   final int originalPrice;
-  final int salePrice;
-  final double discountRate;
+  final int? salePrice;
+  final double? discountPercent;
 
   Map<String, dynamic> toJson() => _$FirestorePricingToJson(this);
 
@@ -33,5 +33,5 @@ class FirestorePricing {
   String toString() =>
       'FirestorePricing{numberPerWeek: $numberPerWeek, totalCount: $totalCount, durationInMonth: '
       '$durationInMonth, classTimeInMinutes: $classTimeInMinutes, plan: $plan, originalPrice: '
-      '$originalPrice, salePrice: $salePrice, discountRate: $discountRate}';
+      '$originalPrice, salePrice: $salePrice, discountPercent: $discountPercent}';
 }

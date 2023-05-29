@@ -25,7 +25,7 @@ FirestoreAcademy _$FirestoreAcademyFromJson(Map<String, dynamic> json) =>
       pricing: (json['pricing'] as List<dynamic>?)
           ?.map((e) => FirestorePricing.fromJson(e as Map<String, dynamic>))
           .toList(),
-      pricingDescription: json['pricingDescription'] as String,
+      pricingDescription: json['pricingDescription'] as String?,
       location: FirestoreAcademyLocation.fromJson(
           json['location'] as Map<String, dynamic>),
     );
