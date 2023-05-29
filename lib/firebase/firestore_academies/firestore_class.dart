@@ -16,7 +16,7 @@ class FirestoreClass {
       _$FirestoreClassFromJson(json);
 
   final String className;
-  final int classTag;
+  final List<int> classTag;
   final List<FirestoreSchedule> schedules;
 
   Map<String, dynamic> toJson() => _$FirestoreClassToJson(this);

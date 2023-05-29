@@ -9,7 +9,8 @@ part of 'firestore_class.dart';
 FirestoreClass _$FirestoreClassFromJson(Map<String, dynamic> json) =>
     FirestoreClass(
       className: json['className'] as String,
-      classTag: json['classTag'] as int,
+      classTag:
+          (json['classTag'] as List<dynamic>).map((e) => e as int).toList(),
       schedules: (json['schedules'] as List<dynamic>)
           .map((e) => FirestoreSchedule.fromJson(e as Map<String, dynamic>))
           .toList(),

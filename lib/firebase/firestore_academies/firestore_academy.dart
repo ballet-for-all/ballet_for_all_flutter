@@ -53,7 +53,7 @@ class FirestoreAcademy {
   final List<FirestoreTeacher> teachers;
   final List<FirestoreTimetable>? timetables;
   final List<FirestorePricing>? pricing;
-  final String pricingDescription;
+  final String? pricingDescription;
   final FirestoreAcademyLocation location;
 
   Map<String, dynamic> toJson() => _$FirestoreAcademyToJson(this);

@@ -10,12 +10,12 @@ FirestorePricing _$FirestorePricingFromJson(Map<String, dynamic> json) =>
     FirestorePricing(
       numberPerWeek: json['numberPerWeek'] as int?,
       totalCount: (json['totalCount'] as num?)?.toDouble(),
-      durationInMonth: json['durationInMonth'] as int,
-      classTimeInMinutes: json['classTimeInMinutes'] as int,
+      durationInMonth: json['durationInMonth'] as int?,
+      classTimeInMinutes: json['classTimeInMinutes'] as int?,
       plan: json['plan'] as String,
       originalPrice: json['originalPrice'] as int,
-      salePrice: json['salePrice'] as int,
-      discountRate: (json['discountRate'] as num).toDouble(),
+      salePrice: json['salePrice'] as int?,
+      discountPercent: (json['discountPercent'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$FirestorePricingToJson(FirestorePricing instance) =>
@@ -27,5 +27,5 @@ Map<String, dynamic> _$FirestorePricingToJson(FirestorePricing instance) =>
       'plan': instance.plan,
       'originalPrice': instance.originalPrice,
       'salePrice': instance.salePrice,
-      'discountRate': instance.discountRate,
+      'discountPercent': instance.discountPercent,
     };
