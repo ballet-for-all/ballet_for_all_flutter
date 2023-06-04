@@ -8,6 +8,8 @@ import 'firebase/firebase_options.dart';
 import 'firebase/firestore_academies/firestore_academies_collection.dart';
 import 'firebase/firestore_client.dart';
 import 'firebase/firestore_locations/firestore_locations_collection.dart';
+import 'repository/academy/academy_repository.dart';
+import 'repository/academy/firestore_academy_repository.dart';
 import 'repository/city/city_repository.dart';
 import 'repository/city/firestore_city_repository.dart';
 import 'router.dart';
@@ -46,6 +48,12 @@ class MyApp extends StatelessWidget {
                   RepositoryProvider.of<FirestoreLocationsCollection>(context),
             ),
           ),
+          RepositoryProvider<AcademyRepository>(
+            create: (context) => FirestoreAcademyRepository(
+              collection:
+                  RepositoryProvider.of<FirestoreAcademiesCollection>(context),
+            ),
+          )
         ],
         child: BlocProvider<AuthCubit>(
           create: (context) => AuthCubit(),
