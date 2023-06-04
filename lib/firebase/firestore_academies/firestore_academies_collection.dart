@@ -1,13 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../firestore_client.dart';
+import '../firestore_collection.dart';
 
-class FirestoreAcademiesCollection {
+class FirestoreAcademiesCollection extends FirestoreCollection {
   FirestoreAcademiesCollection(FirestoreClient client)
       : _ref = client.firestore.collection(_collectionName);
 
   static const String _collectionName = 'academies';
-  final CollectionReference<Map<String, dynamic>> _ref;
+  final CollectionReference _ref;
 
   /// @return
   /// [
@@ -90,8 +91,7 @@ class FirestoreAcademiesCollection {
   /// ]
   Future<List<Map<String, dynamic>>> getAcademies() async {
     final snapshot = await _ref.get();
-    final academies =
-        snapshot.docs.map((doc) => {'id': doc.id, ...doc.data()}).toList();
+    final academies = snapshot.docs.map((doc) => docToMap(doc)).toList();
     return academies;
   }
 }
