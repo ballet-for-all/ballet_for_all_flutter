@@ -6,7 +6,17 @@ class SelectedLocation extends Equatable {
   final String? city;
   final String? district;
   final String? block;
-  
+
+  String get deepestLocation {
+    if (block != null) {
+      return block!;
+    } else if (district != null) {
+      return district!;
+    } else {
+      return city!;
+    }
+  }
+
   @override
   List<Object?> get props => [city, district, block];
 }

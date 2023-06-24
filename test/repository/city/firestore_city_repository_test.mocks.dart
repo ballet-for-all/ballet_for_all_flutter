@@ -7,6 +7,7 @@ import 'dart:async' as _i3;
 
 import 'package:ballet_for_all_flutter/firebase/firestore_locations/firestore_locations_collection.dart'
     as _i2;
+import 'package:cloud_firestore/cloud_firestore.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -38,4 +39,13 @@ class MockFirestoreLocationsCollection extends _i1.Mock
         returnValue:
             _i3.Future<Map<String, dynamic>>.value(<String, dynamic>{}),
       ) as _i3.Future<Map<String, dynamic>>);
+  @override
+  Map<String, dynamic> docToMap(_i4.QueryDocumentSnapshot<Object?>? doc) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #docToMap,
+          [doc],
+        ),
+        returnValue: <String, dynamic>{},
+      ) as Map<String, dynamic>);
 }

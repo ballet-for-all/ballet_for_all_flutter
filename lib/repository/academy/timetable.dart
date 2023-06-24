@@ -16,7 +16,7 @@ class Timetable extends Equatable {
       _$TimetableFromJson(json);
 
   final String? timetableName;
-  final List<Clazz>? classes;
+  final List<Clazz> classes;
 
   Map<String, dynamic> toJson() => _$TimetableToJson(this);
 
