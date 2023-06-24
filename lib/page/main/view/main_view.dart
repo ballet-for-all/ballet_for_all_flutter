@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../repository/academy/academy.dart';
-import 'academy_item.dart';
+import 'academy_list_tile.dart';
 
 class MainView extends StatefulWidget {
   const MainView({
@@ -76,7 +76,7 @@ class _MainViewState extends State<MainView> {
               ),
               SliverList(
                 delegate: SliverChildBuilderDelegate(
-                  (context, index) => AcademyItem(
+                  (context, index) => AcademyListTile(
                     academyImages: widget.academies[index].images,
                     academyName: widget.academies[index].name,
                     academyAddress: widget.academies[index].address,
