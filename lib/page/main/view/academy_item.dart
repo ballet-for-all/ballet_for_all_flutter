@@ -5,30 +5,24 @@ import 'package:intl/intl.dart';
 
 import 'class_info.dart';
 
+// TODO(ghrud92): AcademyTile로 이름 변경
 class AcademyItem extends StatefulWidget {
   const AcademyItem({
-    // TODO(ghrud92): 실제 데이터 적용
-    this.academyImages = const [
-      'https://picsum.photos/200/300',
-      'https://picsum.photos/200/300',
-      'https://picsum.photos/200/300',
-    ],
-    this.academyName = '이화본발레',
-    this.academyAddress = '서울시 영등포구 영등포동4가 123 가나빌딩 4층',
-    this.regularPrice = 50000,
-    this.couponPrice = 60000,
-    this.pieceClass = '백조의 호수',
-    this.pieceClassExtraNum = 2,
+    required this.academyImages,
+    required this.academyName,
+    required this.academyAddress,
+    required this.regularPrice,
+    required this.couponPrice,
+    required this.pieceClassDescription,
     Key? key,
   }) : super(key: key);
 
   final List<String> academyImages;
   final String academyName;
   final String academyAddress;
-  final int regularPrice;
-  final int couponPrice;
-  final String pieceClass;
-  final int pieceClassExtraNum;
+  final int? regularPrice;
+  final int? couponPrice;
+  final String? pieceClassDescription;
 
   @override
   State<AcademyItem> createState() => _AcademyItemState();
@@ -48,8 +42,20 @@ class _AcademyItemState extends State<AcademyItem> {
   @override
   Widget build(BuildContext context) {
     final priceFormat = NumberFormat.decimalPattern('ko');
-    final regularPrice = priceFormat.format(widget.regularPrice);
-    final couponPrice = priceFormat.format(widget.couponPrice);
+    final String regularPriceDescription;
+    if (widget.regularPrice == null) {
+      regularPriceDescription = '정규 수업이 없어요';
+    } else {
+      final regularPrice = priceFormat.format(widget.regularPrice);
+      regularPriceDescription = '회당 $regularPrice원~';
+    }
+    final String couponPriceDescription;
+    if (widget.couponPrice == null) {
+      couponPriceDescription = '쿠폰 수업이 없어요';
+    } else {
+      final couponPrice = priceFormat.format(widget.couponPrice);
+      couponPriceDescription = '회당 $couponPrice원~';
+    }
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 16, left: 24, right: 24),
@@ -164,22 +170,24 @@ class _AcademyItemState extends State<AcademyItem> {
                       Expanded(
                         child: ClassInfo(
                           title: '정규수업',
-                          description: '회당 $regularPrice원~',
+                          description: regularPriceDescription,
+                          exist: widget.regularPrice != null,
                         ),
                       ),
                       Expanded(
                         child: ClassInfo(
                           title: '쿠폰수업',
-                          description: '회당 $couponPrice원~',
+                          description: couponPriceDescription,
+                          exist: widget.couponPrice != null,
                         ),
                       ),
                     ],
                   ),
                   const SizedBox(height: 12),
                   ClassInfo(
-                    title: '작품수업',
-                    description:
-                        '${widget.pieceClass} 외 ${widget.pieceClassExtraNum}개',
+                    title: '작품반',
+                    description: widget.pieceClassDescription ?? '작품 수업이 없어요',
+                    exist: widget.pieceClassDescription != null,
                   )
                 ],
               ),

@@ -4,11 +4,13 @@ class ClassInfo extends StatelessWidget {
   const ClassInfo({
     required this.title,
     required this.description,
+    required this.exist,
     Key? key,
   }) : super(key: key);
 
   final String title;
   final String description;
+  final bool exist;
 
   @override
   Widget build(BuildContext context) => Row(

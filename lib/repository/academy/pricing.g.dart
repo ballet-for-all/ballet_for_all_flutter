@@ -8,7 +8,7 @@ part of 'pricing.dart';
 
 Pricing _$PricingFromJson(Map<String, dynamic> json) => Pricing(
       numberPerWeek: json['numberPerWeek'] as int?,
-      totalCount: (json['totalCount'] as num?)?.toDouble(),
+      totalCount: json['totalCount'] as int?,
       durationInMonth: json['durationInMonth'] as int?,
       classTimeInMinutes: json['classTimeInMinutes'] as int?,
       plan: json['plan'] as String,

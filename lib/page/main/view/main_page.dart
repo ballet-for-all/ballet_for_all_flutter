@@ -4,6 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../auth/auth_cubit.dart';
 import '../../../auth/auth_state.dart';
+import '../../../repository/academy/academy_repository.dart';
+import '../cubit/main_cubit.dart';
+import '../cubit/main_state.dart';
 import 'main_view.dart';
 
 @RoutePage()
@@ -11,28 +14,21 @@ class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => BlocBuilder<AuthCubit, AuthState>(
-        builder: (context, state) {
-          final String deepestLocation = _getDeepestLocation(
-            // NOTE: 메인 페이지에 들어왔다면 city는 null이 될 수 없다.
-            state.selectedLocation.city!,
-            state.selectedLocation.district,
-            state.selectedLocation.block,
-          );
-
-          return MainView(
-            currentLocation: deepestLocation,
-          );
-        },
+  Widget build(BuildContext context) => BlocProvider(
+        create: (context) => MainCubit(
+          academyRepository: context.read<AcademyRepository>(),
+        ),
+        child: BlocBuilder<MainCubit, MainState>(
+          builder: (context, state) => BlocBuilder<AuthCubit, AuthState>(
+            builder: (context, authState) {
+              final cubit = BlocProvider.of<MainCubit>(context);
+              return MainView(
+                currentLocation: authState.selectedLocation.deepestLocation,
+                academies: state.academies,
+                onLoadAcademies: cubit.loadAcademies,
+              );
+            },
+          ),
+        ),
       );
-
-  String _getDeepestLocation(String city, String? district, String? block) {
-    if (block != null) {
-      return block;
-    } else if (district != null) {
-      return district;
-    } else {
-      return city;
-    }
-  }
 }

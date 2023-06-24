@@ -1,14 +1,30 @@
 import 'package:flutter/material.dart';
 
+import '../../../repository/academy/academy.dart';
 import 'academy_item.dart';
 
-class MainView extends StatelessWidget {
+class MainView extends StatefulWidget {
   const MainView({
     required this.currentLocation,
+    required this.academies,
+    required this.onLoadAcademies,
     Key? key,
   }) : super(key: key);
 
   final String currentLocation;
+  final List<Academy> academies;
+  final VoidCallback onLoadAcademies;
+
+  @override
+  State<MainView> createState() => _MainViewState();
+}
+
+class _MainViewState extends State<MainView> {
+  @override
+  void initState() {
+    super.initState();
+    widget.onLoadAcademies();
+  }
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -37,7 +53,7 @@ class MainView extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            currentLocation,
+                            widget.currentLocation,
                             style: const TextStyle(
                               fontSize: 20,
                               color: Color(0xFF222222),
@@ -60,8 +76,16 @@ class MainView extends StatelessWidget {
               ),
               SliverList(
                 delegate: SliverChildBuilderDelegate(
-                  (context, index) => const AcademyItem(),
-                  childCount: 10,
+                  (context, index) => AcademyItem(
+                    academyImages: widget.academies[index].images,
+                    academyName: widget.academies[index].name,
+                    academyAddress: widget.academies[index].address,
+                    regularPrice: widget.academies[index].minRegularPrice,
+                    couponPrice: widget.academies[index].minCouponPrice,
+                    pieceClassDescription:
+                        widget.academies[index].pieceClassDescription,
+                  ),
+                  childCount: widget.academies.length,
                 ),
               ),
             ],
