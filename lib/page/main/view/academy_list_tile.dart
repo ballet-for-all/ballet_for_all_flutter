@@ -5,9 +5,8 @@ import 'package:intl/intl.dart';
 
 import 'class_info.dart';
 
-// TODO(ghrud92): AcademyTile로 이름 변경
-class AcademyItem extends StatefulWidget {
-  const AcademyItem({
+class AcademyListTile extends StatefulWidget {
+  const AcademyListTile({
     required this.academyImages,
     required this.academyName,
     required this.academyAddress,
@@ -25,10 +24,10 @@ class AcademyItem extends StatefulWidget {
   final String? pieceClassDescription;
 
   @override
-  State<AcademyItem> createState() => _AcademyItemState();
+  State<AcademyListTile> createState() => _AcademyListTileState();
 }
 
-class _AcademyItemState extends State<AcademyItem> {
+class _AcademyListTileState extends State<AcademyListTile> {
   late final CarouselController _carouselController;
 
   int _imageIndex = 0;
