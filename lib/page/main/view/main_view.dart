@@ -61,8 +61,38 @@ class _MainViewState extends State<MainView> {
             slivers: [
               SliverToBoxAdapter(
                 child: Container(
-                  height: 440,
-                  color: Colors.grey.shade200,
+                  height: 75,
+                  margin:
+                      const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF5282FF),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 30),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        Text(
+                          '오늘 처음 오셨나요?',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Color(0xFFE0ECFB),
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        Text(
+                          '모두의 발레 서비스 안내',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Color(0xFFFBFFF9),
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
               SliverList(
