@@ -75,7 +75,7 @@ class SignUpView extends StatelessWidget {
                   child: SizedBox(
                     width: 130,
                     height: 130,
-                    child: SvgPicture.asset('assets/images/wings.svg'),
+                    child: SvgPicture.asset('assets/images/ballet-for-all.svg'),
                   ),
                 ),
               ],
