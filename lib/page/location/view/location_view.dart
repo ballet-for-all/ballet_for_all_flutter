@@ -32,7 +32,7 @@ class LocationView extends StatefulWidget {
   final Function(int) onCitySelected;
   final Function(int) onDistrictSelected;
   final Function(int) onBlockSelected;
-  final VoidCallback onConfirmLocation;
+  final VoidCallback onConfirmLocation; 
 
   @override
   State<LocationView> createState() => _LocationViewState();

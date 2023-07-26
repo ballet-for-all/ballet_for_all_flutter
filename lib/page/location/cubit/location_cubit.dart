@@ -16,6 +16,7 @@ class LocationCubit extends Cubit<LocationState> {
   Future<void> initialize() async {
     final loaded = await repository.listCities();
     final cities = loaded.map((city) {
+      //print(city);
       // District에 전체 옵션 추가
       final blocksOfAllDistricts =
           city.districts.expand((district) => district.blocks).toList();
@@ -23,6 +24,7 @@ class LocationCubit extends Cubit<LocationState> {
         name: '전체',
         blocks: blocksOfAllDistricts,
       );
+      print(city.districts);
       final districts = [allDistrict, ...city.districts]
           // District에서 이름이 빈 경우 제거
           .where((district) => district.name.isNotEmpty)
@@ -43,6 +45,8 @@ class LocationCubit extends Cubit<LocationState> {
   }
 
   Future<void> selectCity(int i) async {
+    print("selectCity i : $i");
+    print("state.cities[i].districts : ${state.cities[i].districts}");
     final districts = state.cities[i].districts;
     emit(state.copyWith(
       selectedCity: i,
@@ -54,6 +58,8 @@ class LocationCubit extends Cubit<LocationState> {
   }
 
   Future<void> selectDistrict(int i) async {
+    print("selectCity i : $i");
+    print("state.cities[i].districts : ${state.districts[i].blocks}");
     final blocks = state.districts[i].blocks;
     emit(state.copyWith(
       selectedDistrict: i,
