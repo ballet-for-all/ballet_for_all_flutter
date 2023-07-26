@@ -87,6 +87,7 @@ class LocationPage1 extends GetView<LocationController> {
                         ),
                         child: ListView.builder(
                           itemBuilder: (context, i) {
+                        
                             final city = controller.cities[i];
                             return LocationListItem(
                               text: city.name,
@@ -107,6 +108,7 @@ class LocationPage1 extends GetView<LocationController> {
                         ),
                         child: ListView.builder(
                           itemBuilder: (context, i) {
+                           
                             final district = controller.districts[i];
                             return LocationListItem(
                               text: district.name,
@@ -132,8 +134,9 @@ class LocationPage1 extends GetView<LocationController> {
                               text: block.name,
                               selected: controller.selectedBlock.value == i,
                               onTap: () {
-                                print('sdf');
-                                controller.selectBlock(i);
+                              print(controller.selectedBlock.value);
+                              print(i);
+                               controller.selectedBlock.value = i;
                               },
                             );
                           },

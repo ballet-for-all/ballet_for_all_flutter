@@ -32,35 +32,22 @@ class LocationController extends GetxController {
         name: '전체',
         blocks: blocksOfAllDistricts,
       );
-      districts.value = [allDistrict, ...city.districts]
-          // District에서 이름이 빈 경우 제거
-          .where((district) => district.name.isNotEmpty)
-          // Block에 전체 옵션 추가
-          .map((district) {
-        blocks.value = [const Block(name: '전체'), ...district.blocks];
-        return District(
-          name: district.name,
-          blocks: blocks,
-        );
-      }).toList();
+      
       return City(
         name: city.name,
-        districts: districts,
+        districts: city.districts,
       );
     }).toList();
   }
 
    Future<void> selectCity(int i) async {
-    print("클릭1");
-    print("selectCity : ${cities[i].districts}");
+    districts.value = [];
+    blocks.value = [];
     districts.value = cities[i].districts;
     selectedCity.value = i;
     selectedDistrict.value = -1;
     selectedBlock.value = -1;
-    blocks.value = [];
-    print(blocks.value);
-    print(districts.value.length);
-    print(districts.value);
+
   }
 
   Future<void> selectDistrict(int i) async {
@@ -72,7 +59,9 @@ class LocationController extends GetxController {
   }
 
   Future<void> selectBlock(int i) async {
+    print(i);
     selectedBlock.value = i;
+    print(selectedBlock.value);
   }
 
 
