@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:get/get.dart';
 
+import '../../routes/app_routes.dart';
 import '../../shared/widget/safe_bottom_button.dart';
+import '../main/view/main_view.dart';
+import '../sample_page.dart';
 import 'controller.dart';
 import './widget/location_list_item.dart';
 
@@ -11,7 +14,8 @@ class LocationPage1 extends GetView<LocationController> {
   final _borderSide = const BorderSide(color: Color(0xFFCCCCCC), width: 1);
 
   @override
-  Widget build(BuildContext context) => Scaffold(
+  Widget build(BuildContext context) => Obx(()=> 
+  Scaffold(
         appBar: AppBar(
           title: const Text(
             '내 동네 설정하기',
@@ -36,7 +40,13 @@ class LocationPage1 extends GetView<LocationController> {
                     Expanded(
                       child: TextField(
                         onChanged: (text) {
-                          // TODO(ghrud92): 동네 검색
+                          final a = controller.cities.map((element) => element.districts).toList();
+                          for(int i = 0; i<a.length; i++){
+                            controller.blockAddList(a[i].first.blocks);
+                          }
+                          print('sdfsdf');
+                          //district.name
+                          print(controller.list);
                         },
                         style: const TextStyle(
                           color: Color(0xFF222222),
@@ -78,7 +88,7 @@ class LocationPage1 extends GetView<LocationController> {
                 ),
               ),
               Expanded(
-                child: Obx(() => Row(
+                child: Row(
                   children: [
                     Expanded(
                       child: Container(
@@ -134,9 +144,7 @@ class LocationPage1 extends GetView<LocationController> {
                               text: block.name,
                               selected: controller.selectedBlock.value == i,
                               onTap: () {
-                              print(controller.selectedBlock.value);
-                              print(i);
-                               controller.selectedBlock.value = i;
+                               controller.selectBlock(controller.selectedDistrict.value,i);
                               },
                             );
                           },
@@ -146,9 +154,10 @@ class LocationPage1 extends GetView<LocationController> {
                     ),
                   ],
                 ),), 
-              ),
-              SafeBottomButton(
-                onTap: () {},
+              controller.settingBtnChk.value == true ? SafeBottomButton(
+                onTap: () {
+                  Get.to(SamplePage());
+                },
                 child: const Text(
                   '설정하기',
                   style: TextStyle(
@@ -156,9 +165,9 @@ class LocationPage1 extends GetView<LocationController> {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-              ),
+              ) : Container(),
             ],
           ),
 
-      );
+      ));
 }

@@ -13,8 +13,12 @@ class LocationController extends GetxController {
   RxInt selectedCity = 0.obs;
   RxInt selectedDistrict = 0.obs;
   RxInt selectedBlock = 0.obs;
+  RxBool settingBtnChk = false.obs;
   RxBool select = false.obs;
   RxBool selectBlockBool = false.obs;
+  final list = <Block>[];
+
+
 
   @override
   void onInit() async {
@@ -47,22 +51,30 @@ class LocationController extends GetxController {
     selectedCity.value = i;
     selectedDistrict.value = -1;
     selectedBlock.value = -1;
+    settingBtnChk.value = false;
 
   }
 
   Future<void> selectDistrict(int i) async {
-    print("클릭2");
-    print("selectDistrict : ${districts[i].blocks}");
     blocks.value = districts[i].blocks;
     selectedDistrict.value = i;
     selectedBlock.value = -1;
+    settingBtnChk.value = false;
+
   }
 
-  Future<void> selectBlock(int i) async {
-    print(i);
-    selectedBlock.value = i;
-    print(selectedBlock.value);
+  Future<void> selectBlock(int i,int j) async {
+    blocks.value = [];
+    blocks.value = districts[i].blocks;
+    selectedBlock.value = j;
+    settingBtnChk.value = true;
   }
+
+  void blockAddList(list1){
+    final list = list1;
+    print(list['name']);
+  }
+
 
 
 }

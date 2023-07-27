@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 
-class LocationListItem extends StatelessWidget {
+import '../controller.dart';
+
+class LocationListItem extends GetView<LocationController> {
   const LocationListItem({
     required this.text,
     this.selected = false,
