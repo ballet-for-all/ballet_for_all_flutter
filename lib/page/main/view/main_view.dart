@@ -62,8 +62,7 @@ class _MainViewState extends State<MainView> {
               SliverToBoxAdapter(
                 child: Container(
                   height: 75,
-                  margin:
-                      const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+                  margin: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
                   decoration: BoxDecoration(
                     color: const Color(0xFF5282FF),
                     borderRadius: BorderRadius.circular(12),
@@ -98,13 +97,13 @@ class _MainViewState extends State<MainView> {
               SliverList(
                 delegate: SliverChildBuilderDelegate(
                   (context, index) => AcademyListTile(
+                    id: widget.academies[index].id,
                     academyImages: widget.academies[index].images,
                     academyName: widget.academies[index].name,
                     academyAddress: widget.academies[index].address,
                     regularPrice: widget.academies[index].minRegularPrice,
                     couponPrice: widget.academies[index].minCouponPrice,
-                    pieceClassDescription:
-                        widget.academies[index].pieceClassDescription,
+                    pieceClassDescription: widget.academies[index].pieceClassDescription,
                   ),
                   childCount: widget.academies.length,
                 ),
