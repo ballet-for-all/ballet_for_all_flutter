@@ -1,11 +1,14 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 
+import '../../../router.gr.dart';
 import 'class_info.dart';
 
 class AcademyListTile extends StatefulWidget {
   const AcademyListTile({
+    required this.id,
     required this.academyImages,
     required this.academyName,
     required this.academyAddress,
@@ -15,6 +18,7 @@ class AcademyListTile extends StatefulWidget {
     Key? key,
   }) : super(key: key);
 
+  final String id;
   final List<String> academyImages;
   final String academyName;
   final String academyAddress;
@@ -41,9 +45,7 @@ class _AcademyListTileState extends State<AcademyListTile> {
   Widget build(BuildContext context) => Padding(
         padding: const EdgeInsets.only(bottom: 16, left: 24, right: 24),
         child: InkWell(
-          onTap: () {
-            // TODO(ghrud92): 학원 상세 페이지로 이동
-          },
+          onTap: () => context.pushRoute(AcademyRoute(id: widget.id)),
           child: Container(
             clipBehavior: Clip.hardEdge,
             decoration: BoxDecoration(

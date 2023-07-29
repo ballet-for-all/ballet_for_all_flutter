@@ -19,11 +19,13 @@ class AppRouter extends $AppRouter {
       ],
     ),
     AutoRoute(
-      path: '/',
+      path: '/academies',
+      initial: true,
       page: MainRouter.page,
       guards: [AuthGuard()],
       children: [
         AutoRoute(path: '', page: MainRoute.page),
+        AutoRoute(path: ':id', page: AcademyRoute.page),
       ],
     ),
   ];

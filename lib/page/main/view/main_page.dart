@@ -9,6 +9,7 @@ import '../cubit/main_cubit.dart';
 import '../cubit/main_state.dart';
 import 'main_view.dart';
 
+// TODO(ghrud92): AcademyListPage 로 이름 변경
 @RoutePage()
 class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);
