@@ -10,14 +10,14 @@ class AppBarLeadingButton extends StatelessWidget {
         child: InkWell(
           onTap: () => context.popRoute(),
           child: Container(
-            decoration: BoxDecoration(
-              color: const Color(0xFF2A2A2A).withOpacity(0.6),
+            decoration: const BoxDecoration(
+              color: Color(0xFFF5F5F5),
               shape: BoxShape.circle,
             ),
             child: const Icon(
               Icons.arrow_back,
               size: 24,
-              color: Color(0xFFC6C6C6),
+              color: Color(0xFF222222),
             ),
           ),
         ),
