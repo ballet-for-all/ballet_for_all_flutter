@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../repository/academy/academy.dart';
-import '../../../shared/widget/app_bar_button.dart';
+import '../../../shared/widget/app_bar_action_button.dart';
 import 'academy_list_tile.dart';
 
 class MainView extends StatefulWidget {
@@ -37,18 +37,18 @@ class _MainViewState extends State<MainView> {
           ),
           leadingWidth: 56,
           actions: [
-            AppBarButton(
+            AppBarActionButton(
               onPressed: () {},
               label: widget.currentLocation,
               icon: Icons.keyboard_arrow_down,
             ),
             const SizedBox(width: 5),
-            AppBarButton(
+            AppBarActionButton(
               onPressed: () {},
               icon: Icons.filter_list,
             ),
             const SizedBox(width: 5),
-            AppBarButton(
+            AppBarActionButton(
               onPressed: () {},
               icon: Icons.favorite_border,
             ),
