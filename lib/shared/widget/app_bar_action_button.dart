@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class AppBarButton extends StatelessWidget {
-  const AppBarButton({
+class AppBarActionButton extends StatelessWidget {
+  const AppBarActionButton({
     required this.onPressed,
     this.label,
     this.icon,
@@ -20,11 +20,11 @@ class AppBarButton extends StatelessWidget {
   Widget build(BuildContext context) => InkWell(
         onTap: onPressed,
         child: Container(
-          margin: const EdgeInsets.symmetric(vertical: 6),
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+          margin: const EdgeInsets.symmetric(vertical: 9),
+          padding: const EdgeInsets.symmetric(horizontal: 9),
           decoration: BoxDecoration(
             color: backgroundColor,
-            borderRadius: BorderRadius.circular(50),
+            borderRadius: BorderRadius.circular(38),
           ),
           child: Center(child: label != null ? _withLabel : _onlyIcon),
         ),
