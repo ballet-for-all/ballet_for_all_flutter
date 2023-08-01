@@ -40,13 +40,7 @@ class LocationPage1 extends GetView<LocationController> {
                     Expanded(
                       child: TextField(
                         onChanged: (text) {
-                          final a = controller.cities.map((element) => element.districts).toList();
-                          for(int i = 0; i<a.length; i++){
-                            controller.blockAddList(a[i].first.blocks);
-                          }
-                          print('sdfsdf');
-                          //district.name
-                          print(controller.list);
+                          controller.searchText(text);
                         },
                         style: const TextStyle(
                           color: Color(0xFF222222),
