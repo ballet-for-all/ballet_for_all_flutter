@@ -1,33 +1,14 @@
+import 'package:ballet_for_all_flutter/page/main/widget/academy_list_title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 import '../../../repository/academy/academy.dart';
 import '../../../shared/widget/app_bar_button.dart';
-import 'academy_list_tile.dart';
+import 'controller.dart';
 
-class MainView extends StatefulWidget {
-  const MainView({
-    required this.currentLocation,
-    required this.academies,
-    required this.onLoadAcademies,
-    Key? key,
-  }) : super(key: key);
-
-  final String currentLocation;
-  final List<Academy> academies;
-  final VoidCallback onLoadAcademies;
-
-  @override
-  State<MainView> createState() => _MainViewState();
-}
-
-class _MainViewState extends State<MainView> {
-  @override
-  void initState() {
-    super.initState();
-    widget.onLoadAcademies();
-  }
-
+//mainview쪽
+class MainView1 extends GetView<MainController> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
@@ -39,7 +20,7 @@ class _MainViewState extends State<MainView> {
           actions: [
             AppBarButton(
               onPressed: () {},
-              label: widget.currentLocation,
+              label: 'ㄴㅇㄹ',
               icon: Icons.keyboard_arrow_down,
             ),
             const SizedBox(width: 5),
@@ -55,7 +36,7 @@ class _MainViewState extends State<MainView> {
             const SizedBox(width: 24),
           ],
         ),
-        body: Container(
+        body: Obx(()=> Container(
           color: const Color(0xFFF5F5F5),
           child: CustomScrollView(
             slivers: [
@@ -90,7 +71,7 @@ class _MainViewState extends State<MainView> {
                             fontWeight: FontWeight.w700,
                           ),
                         ),
-                      ],
+                      ],  
                     ),
                   ),
                 ),
@@ -98,20 +79,20 @@ class _MainViewState extends State<MainView> {
               SliverList(
                 delegate: SliverChildBuilderDelegate(
                   (context, index) => AcademyListTile(
-                    academyImages: widget.academies[index].images,
-                    academyName: widget.academies[index].name,
-                    academyAddress: widget.academies[index].address,
-                    regularPrice: widget.academies[index].minRegularPrice,
-                    couponPrice: widget.academies[index].minCouponPrice,
+                    academyImages: controller.list[index].images,
+                    academyName: controller.list[index].name,
+                    academyAddress: controller.list[index].address,
+                    regularPrice: controller.list[index].minRegularPrice,
+                    couponPrice: controller.list[index].minCouponPrice,
                     pieceClassDescription:
-                        widget.academies[index].pieceClassDescription,
+                        controller.list[index].pieceClassDescription,
                   ),
-                  childCount: widget.academies.length,
+                  childCount: controller.list.length,
                 ),
               ),
             ],
           ),
-        ),
+        ),), 
         // TODO(ghrud92): 탭바 추가
       );
 }

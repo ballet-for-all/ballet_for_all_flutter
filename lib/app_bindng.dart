@@ -1,7 +1,8 @@
 import 'package:get/get.dart';
 
-import 'page/location1/controller.dart';
-import 'repository1/location_repository.dart';
+import 'page/location/controller.dart';
+import 'page/main/controller.dart';
+import 'repository/city/location_repository.dart';
 
 class AppBinding extends Bindings{
   @override
@@ -9,6 +10,7 @@ class AppBinding extends Bindings{
     // TODO: implement dependencies
     Get.put(LocationRepository);
     Get.put(LocationController(),permanent: true);
+    Get.put(MainController(),permanent: true);
   }
 
 }

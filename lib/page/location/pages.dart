@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 
 import '../../routes/app_routes.dart';
 import '../../shared/widget/safe_bottom_button.dart';
-import '../main/view/main_view.dart';
 import '../sample_page.dart';
 import 'controller.dart';
 import './widget/location_list_item.dart';
@@ -149,9 +148,7 @@ class LocationPage1 extends GetView<LocationController> {
                   ],
                 ),), 
               controller.settingBtnChk.value == true ? SafeBottomButton(
-                onTap: () {
-                  Get.to(SamplePage());
-                },
+                onTap: controller.onSettingClick,
                 child: const Text(
                   '설정하기',
                   style: TextStyle(

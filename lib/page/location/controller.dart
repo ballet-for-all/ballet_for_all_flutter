@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import '../../repository/city/block.dart';
 import '../../repository/city/city.dart';
 import '../../repository/city/district.dart';
-import '../../repository1/location_repository.dart';
+import '../../repository/city/location_repository.dart';
 
 class LocationController extends GetxController {
   final repository = Get.put(LocationRepository());
@@ -37,7 +37,7 @@ class LocationController extends GetxController {
       //print(loaded.asMap().entries.map((e) => print(e)));
       // District에 전체 옵션 추가
       //print(city.districts.asMap().entries.toList().map((e) => print(e.key)).toList());
-      print(city.districts.asMap().entries.toList().map((e) => print(e.value)).toList());
+      //print(city.districts.asMap().entries.toList().map((e) => print(e.value)).toList());
       
       
       city.districts.asMap().entries.toList().map((e){
@@ -67,10 +67,7 @@ class LocationController extends GetxController {
           .map((district) {
         final blocks = [const Block(name: '전체'), ...district.blocks];
         for (int i = 0; i < district.blocks.length; i++) {
-          //print(district.blocks[i].name);
-          //print("dist ${city}");
-          // print(city.name);
-          // print(city.districts);
+        
           
           //print(blocks.asMap().entries.map((e) => print(e.key)));
           list_block.add(district.blocks[i].name);
@@ -152,12 +149,12 @@ class LocationController extends GetxController {
 
     final String isText1 = list_block
         .map((e) {
-          print(e.toString());
+          //print(e.toString());
           return e.toString();
         })
         .where((element) => element.contains(text))
         .toString();
-    print(isText1);
+    //print(isText1);
 
     // final String isText = list_block.where((element) {
     //   return element.contains(text);
@@ -177,5 +174,9 @@ class LocationController extends GetxController {
     //print(list);
     //print(list.toList());
     //print(list);
+  }
+
+  void onSettingClick(){
+    print("settingclick");
   }
 }

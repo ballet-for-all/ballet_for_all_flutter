@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../firebase/firestore_collection.dart';
-import '../repository/city/city.dart';
+import '../../firebase/firestore_collection.dart';
+import 'city.dart';
 
  class LocationRepository extends FirestoreCollection{
   
