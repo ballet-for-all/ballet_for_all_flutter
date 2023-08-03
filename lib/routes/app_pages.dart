@@ -14,7 +14,7 @@ class AppPages{
 
 
   static final routes = [
-    GetPage(name: Routes.splash, page: () => MainView1(), binding: MainBinding()),
+    GetPage(name: Routes.splash, page: () => MainView(), binding: MainBinding()),
     GetPage(name: Routes.signup, page: () => SignUpView(),binding: SignUpBinding()),
     GetPage(name: Routes.location, page: () => LocationPage1(),binding: LocationBinding()),
   ];

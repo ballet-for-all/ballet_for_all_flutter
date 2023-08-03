@@ -4,14 +4,17 @@ import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'app_bindng.dart';
+import 'di.dart';
 import 'firebase/firebase_options.dart';
 import 'routes/app_pages.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  DependencyInjection.init();
   Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   ).then((_) => runApp(MyApp()));
+
 }
 
 class MyApp extends StatelessWidget {

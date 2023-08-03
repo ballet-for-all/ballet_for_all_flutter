@@ -148,7 +148,9 @@ class LocationPage1 extends GetView<LocationController> {
                   ],
                 ),), 
               controller.settingBtnChk.value == true ? SafeBottomButton(
-                onTap: controller.onSettingClick,
+                onTap: (){
+                  controller.onSettingClick();
+                },
                 child: const Text(
                   '설정하기',
                   style: TextStyle(

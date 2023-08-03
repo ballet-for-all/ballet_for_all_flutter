@@ -8,9 +8,9 @@ import '../../../shared/widget/app_bar_button.dart';
 import 'controller.dart';
 
 //mainview쪽
-class MainView1 extends GetView<MainController> {
+class MainView extends GetView<MainController> {
   @override
-  Widget build(BuildContext context) => Scaffold(
+  Widget build(BuildContext context) => Obx(() => Scaffold(
         appBar: AppBar(
           leading: Padding(
             padding: const EdgeInsets.only(left: 24),
@@ -20,7 +20,7 @@ class MainView1 extends GetView<MainController> {
           actions: [
             AppBarButton(
               onPressed: () {},
-              label: 'ㄴㅇㄹ',
+              label: '${controller.myLocation.value}',
               icon: Icons.keyboard_arrow_down,
             ),
             const SizedBox(width: 5),
@@ -36,7 +36,7 @@ class MainView1 extends GetView<MainController> {
             const SizedBox(width: 24),
           ],
         ),
-        body: Obx(()=> Container(
+        body: Container(
           color: const Color(0xFFF5F5F5),
           child: CustomScrollView(
             slivers: [
@@ -92,7 +92,7 @@ class MainView1 extends GetView<MainController> {
               ),
             ],
           ),
-        ),), 
+        ), 
         // TODO(ghrud92): 탭바 추가
-      );
+      )); 
 }

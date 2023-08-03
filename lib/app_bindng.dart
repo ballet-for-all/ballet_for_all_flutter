@@ -10,7 +10,6 @@ class AppBinding extends Bindings{
     // TODO: implement dependencies
     Get.put(LocationRepository);
     Get.put(LocationController(),permanent: true);
-    Get.put(MainController(),permanent: true);
   }
 
 }

@@ -1,10 +1,12 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../repository/city/block.dart';
 import '../../repository/city/city.dart';
 import '../../repository/city/district.dart';
 import '../../repository/city/location_repository.dart';
+import '../../routes/app_routes.dart';
 
 class LocationController extends GetxController {
   final repository = Get.put(LocationRepository());
@@ -23,6 +25,8 @@ class LocationController extends GetxController {
   Set<dynamic> list_block = {};
 
   List<Map<String,dynamic>> listmap = [];
+
+  final _sharedPreferences = Get.find<SharedPreferences>();
 
   @override
   void onInit() async {
@@ -176,7 +180,8 @@ class LocationController extends GetxController {
     //print(list);
   }
 
-  void onSettingClick(){
-    print("settingclick");
+  void onSettingClick() async{
+    await _sharedPreferences.setString("myLocation", blocks[selectedBlock.value].name);
+    Get.toNamed(Routes.splash);
   }
 }
