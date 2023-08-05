@@ -10,7 +10,7 @@ import 'routes/app_pages.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  DependencyInjection.init();
+  // DependencyInjection.init();
   Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   ).then((_) => runApp(MyApp()));

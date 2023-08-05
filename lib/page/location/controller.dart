@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../repository/city/block.dart';
 import '../../repository/city/city.dart';
@@ -26,8 +25,6 @@ class LocationController extends GetxController {
 
   List<Map<String,dynamic>> listmap = [];
 
-  final _sharedPreferences = Get.find<SharedPreferences>();
-
   @override
   void onInit() async {
     // TODO: implement onInit
@@ -45,25 +42,18 @@ class LocationController extends GetxController {
       
       
       city.districts.asMap().entries.toList().map((e){
-        print(e.key);
-        print(e.value);
         listmap.add({
           'key' : e.key,
           'value' : e.value,
         });
       });
 
-      print(listmap);
-
-      //print(listmap.map((e) => print(e.values)));
-      //print(city.districts.expand((element) => element.blocks.asMap().entries.toList()));
       final blocksOfAllDistricts =
           city.districts.expand((district) => district.blocks).toList();
       final allDistrict = District(
         name: '전체',
         blocks: blocksOfAllDistricts,
       );
-      //print('sdf ${blocksOfAllDistricts}');
 
 
       final districts = [allDistrict, ...city.districts]
@@ -73,7 +63,6 @@ class LocationController extends GetxController {
         for (int i = 0; i < district.blocks.length; i++) {
         
           
-          //print(blocks.asMap().entries.map((e) => print(e.key)));
           list_block.add(district.blocks[i].name);
         }
         return District(
@@ -133,23 +122,13 @@ class LocationController extends GetxController {
   }
 
   void searchText(String text) {
-    //print(text);
-    //print(list_block);
     districts.value = cities[0].districts;
-    // for(int i = 0 ; i<cities.length; i++){
-    //   for(int j=0; j<cities[i].districts.length; j++){
-    //     for(int k = 0; k<cities[i].districts[j].blocks.length;k++){
-    //       //print(cities[i].districts[j].blocks[k].name);
-    //       print(text.contains(cities[i].districts[j].blocks[k].name));
-    //     }
-    //   }
-    // }
+
     selectedCity.value = 1;
     blocks.value = districts[0].blocks;
     selectedDistrict.value = 0;
     selectedBlock.value = 1;
 
-    // final first = list_block.indexWhere((note) => note);
 
     final String isText1 = list_block
         .map((e) {
@@ -158,30 +137,9 @@ class LocationController extends GetxController {
         })
         .where((element) => element.contains(text))
         .toString();
-    //print(isText1);
-
-    // final String isText = list_block.where((element) {
-    //   return element.contains(text);
-    // }).toString();
-    //print(text);
-    //print(cities[0].districts[0].blocks[0].name);
-
-    // String list333 = a.where((element) {
-    //   final list_total = [...element.toList()];
-    //   print(list_total);
-    //  // print(element.first.first.contains(text));
-    //   //print(element.first.first);
-    //   //print(text);
-    //   //print(element.first.first == text);
-    //   return element.first.first == text;
-    // }).toList().toString();
-    //print(list);
-    //print(list.toList());
-    //print(list);
   }
 
   void onSettingClick() async{
-    await _sharedPreferences.setString("myLocation", blocks[selectedBlock.value].name);
     Get.toNamed(Routes.splash);
   }
 }
