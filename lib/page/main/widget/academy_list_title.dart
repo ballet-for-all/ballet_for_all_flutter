@@ -3,7 +3,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 
-import '../../../router.gr.dart';
 import 'class_info.dart';
 
 class AcademyListTile extends StatefulWidget {
@@ -45,7 +44,7 @@ class _AcademyListTileState extends State<AcademyListTile> {
   Widget build(BuildContext context) => Padding(
         padding: const EdgeInsets.only(bottom: 16, left: 24, right: 24),
         child: InkWell(
-          onTap: () => context.pushRoute(AcademyRoute(id: widget.id)),
+          onTap: (){},
           child: Container(
             clipBehavior: Clip.hardEdge,
             decoration: BoxDecoration(
