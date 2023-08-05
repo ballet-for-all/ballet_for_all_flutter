@@ -4,8 +4,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../../../repository/academy/academy.dart';
-import '../../../shared/widget/app_bar_button.dart';
+import '../../../shared/widget/app_bar_action_button.dart';
 import 'controller.dart';
+
 
 //mainview쪽
 class MainView extends GetView<MainController> {
@@ -18,18 +19,18 @@ class MainView extends GetView<MainController> {
           ),
           leadingWidth: 56,
           actions: [
-            AppBarButton(
+            AppBarActionButton(
               onPressed: () {},
               label: '${controller.myLocation.value}',
               icon: Icons.keyboard_arrow_down,
             ),
             const SizedBox(width: 5),
-            AppBarButton(
+            AppBarActionButton(
               onPressed: () {},
               icon: Icons.filter_list,
             ),
             const SizedBox(width: 5),
-            AppBarButton(
+            AppBarActionButton(
               onPressed: () {},
               icon: Icons.favorite_border,
             ),
@@ -43,8 +44,7 @@ class MainView extends GetView<MainController> {
               SliverToBoxAdapter(
                 child: Container(
                   height: 75,
-                  margin:
-                      const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+                  margin: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
                   decoration: BoxDecoration(
                     color: const Color(0xFF5282FF),
                     borderRadius: BorderRadius.circular(12),
@@ -79,6 +79,7 @@ class MainView extends GetView<MainController> {
               SliverList(
                 delegate: SliverChildBuilderDelegate(
                   (context, index) => AcademyListTile(
+                    id: controller.list[index].id,
                     academyImages: controller.list[index].images,
                     academyName: controller.list[index].name,
                     academyAddress: controller.list[index].address,
