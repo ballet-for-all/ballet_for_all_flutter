@@ -1,11 +1,12 @@
-import 'package:ballet_for_all_flutter/page/sign_up/widget/login_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import 'controller.dart';
+import 'widget/login_button.dart';
 
 class SignUpView extends GetView<SignUpPageController> {
+  const SignUpView({super.key});
 
   @override
   Widget build(BuildContext context) => Scaffold(

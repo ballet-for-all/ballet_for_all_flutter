@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +43,7 @@ class _AcademyListTileState extends State<AcademyListTile> {
   Widget build(BuildContext context) => Padding(
         padding: const EdgeInsets.only(bottom: 16, left: 24, right: 24),
         child: InkWell(
-          onTap: (){},
+          onTap: () {},
           child: Container(
             clipBehavior: Clip.hardEdge,
             decoration: BoxDecoration(

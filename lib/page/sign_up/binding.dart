@@ -1,10 +1,9 @@
-import 'package:ballet_for_all_flutter/page/sign_up/controller.dart';
 import 'package:get/get.dart';
+import 'controller.dart';
 
-class SignUpBinding extends Bindings{
+class SignUpBinding extends Bindings {
   @override
   void dependencies() {
-    // TODO: implement dependencies
     Get.put(SignUpPageController());
   }
 }
