@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class AppBarLeadingButton extends StatelessWidget {
   const AppBarLeadingButton({super.key});
@@ -8,7 +9,7 @@ class AppBarLeadingButton extends StatelessWidget {
   Widget build(BuildContext context) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 9),
         child: InkWell(
-          onTap: () => context.popRoute(),
+          onTap: () => Get.back(),
           child: Container(
             decoration: const BoxDecoration(
               color: Color(0xFFF5F5F5),

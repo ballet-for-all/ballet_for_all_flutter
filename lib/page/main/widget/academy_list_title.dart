@@ -1,7 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+import '../../academy/view/academy_page.dart';
 import 'class_info.dart';
 
 class AcademyListTile extends StatefulWidget {
@@ -43,7 +45,9 @@ class _AcademyListTileState extends State<AcademyListTile> {
   Widget build(BuildContext context) => Padding(
         padding: const EdgeInsets.only(bottom: 16, left: 24, right: 24),
         child: InkWell(
-          onTap: () {},
+          onTap: () {
+            Get.to(AcademyPage(id: widget.id));
+          },
           child: Container(
             clipBehavior: Clip.hardEdge,
             decoration: BoxDecoration(
