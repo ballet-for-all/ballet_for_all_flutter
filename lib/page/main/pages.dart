@@ -1,12 +1,14 @@
-import 'package:ballet_for_all_flutter/page/main/widget/academy_list_title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import '../../../shared/widget/app_bar_action_button.dart';
 import 'controller.dart';
+import 'widget/academy_list_title.dart';
 
 //mainview쪽
 class MainView extends GetView<MainController> {
+  const MainView({super.key});
+
   @override
   Widget build(BuildContext context) => Obx(() => Scaffold(
         appBar: AppBar(
