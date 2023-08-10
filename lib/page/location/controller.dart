@@ -18,10 +18,7 @@ class LocationController extends GetxController {
   RxBool selectBlockBool = false.obs;
   List<Block> list = <Block>[];
   List<District> listDistrict = [];
-
-  Set<dynamic> list_block = {};
-
-  List<Map<String, dynamic>> listmap = [];
+  Set<dynamic> listBlock = {};
 
   @override
   void onInit() async {
@@ -32,32 +29,12 @@ class LocationController extends GetxController {
     selectedBlock.value = -1;
     final loaded = await repository.getLocation();
     cities.value = loaded.map((city) {
-      city.districts.asMap().entries.toList().map((e) {
-        listmap.add({
-          'key': e.key,
-          'value': e.value,
-        });
-      });
-
       final blocksOfAllDistricts =
           city.districts.expand((district) => district.blocks).toList();
       final allDistrict = District(
         name: '전체',
         blocks: blocksOfAllDistricts,
       );
-
-      final districts = [allDistrict, ...city.districts]
-          // District에서 이름이 빈 경우 제거
-          .map((district) {
-        final blocks = [const Block(name: '전체'), ...district.blocks];
-        for (int i = 0; i < district.blocks.length; i++) {
-          list_block.add(district.blocks[i].name);
-        }
-        return District(
-          name: district.name,
-          blocks: blocks,
-        );
-      }).toList();
 
       return City(
         name: city.name,
@@ -88,10 +65,6 @@ class LocationController extends GetxController {
     settingBtnChk.value = true;
   }
 
-  void blockAddList(list1) {
-    list.add(list1);
-  }
-
   void selectdis(String i, int k) {}
 
   void searchText(String text) {
@@ -101,13 +74,6 @@ class LocationController extends GetxController {
     blocks.value = districts[0].blocks;
     selectedDistrict.value = 0;
     selectedBlock.value = 1;
-
-    final String isText1 = list_block
-        .map((e) {
-          return e.toString();
-        })
-        .where((element) => element.contains(text))
-        .toString();
   }
 
   void onSettingClick() async {
