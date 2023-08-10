@@ -105,13 +105,13 @@ flutter: Teacher(정유미, 학력
       id: id,
       name: '에이에스바디 도곡본점',
       address: '서울 강남구 논현로28길 53 대하빌딩 2층',
-      phone: ['010-2345-2876', '02-6338-2345'],
+      phone: const ['010-2345-2876', '02-6338-2345'],
       sns: sns,
       coupon: false,
       images: images,
       teachers: teachers,
-      timetables: [],
-      pricing: [],
+      timetables: const [],
+      pricing: const [],
       pricingDescription: null,
       location: const Location(
         lat: 37.4848834756983,
@@ -127,6 +127,8 @@ flutter: Teacher(정유미, 학력
       images: dummyAcademy.images,
       name: dummyAcademy.name,
       address: dummyAcademy.address,
+      phone: dummyAcademy.phone,
+      sns: dummyAcademy.sns,
     );
   }
 }

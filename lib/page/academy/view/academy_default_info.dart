@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 
+import '../../../repository/academy/sns.dart';
+import 'sns_icon_buttons.dart';
+
 class AcademyDefaultInfo extends StatelessWidget {
   const AcademyDefaultInfo({
     required this.name,
     required this.address,
+    required this.phone,
+    required this.sns,
     super.key,
   });
 
   final String name;
   final String address;
+  final List<String> phone;
+  final Sns sns;
 
   @override
   Widget build(BuildContext context) => Padding(
@@ -48,7 +55,8 @@ class AcademyDefaultInfo extends StatelessWidget {
                 )
               ],
             ),
-            // TODO(ghrud92): Sns 정보 추가
+            const SizedBox(height: 10),
+            SnsIconButtons(phone: phone, sns: sns),
           ],
         ),
       );
