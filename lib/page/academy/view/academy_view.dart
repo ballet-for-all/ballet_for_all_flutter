@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
+import '../../../repository/academy/sns.dart';
 import '../../../shared/widget/app_bar_action_button.dart';
 import '../../../shared/widget/app_bar_leading_button.dart';
 import 'academy_default_info.dart';
@@ -11,6 +12,8 @@ class AcademyView extends StatelessWidget {
     required this.images,
     required this.name,
     required this.address,
+    required this.phone,
+    required this.sns,
     super.key,
   });
 
@@ -18,6 +21,8 @@ class AcademyView extends StatelessWidget {
   final List<String> images;
   final String name;
   final String address;
+  final List<String> phone;
+  final Sns sns;
 
   @override
   Widget build(BuildContext context) => Container(
@@ -62,7 +67,12 @@ class AcademyView extends StatelessWidget {
                   ),
                 ),
                 // TODO(ghrud92): Carousel indicator 추가
-                AcademyDefaultInfo(name: name, address: address),
+                AcademyDefaultInfo(
+                  name: name,
+                  address: address,
+                  phone: phone,
+                  sns: sns,
+                ),
                 const Divider(
                   height: 1,
                   color: Color(0xFFE5E5E5),

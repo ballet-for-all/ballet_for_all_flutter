@@ -3,6 +3,19 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'sns.g.dart';
 
+enum SnsType {
+  kakaoTalk,
+  naverTalkTalk,
+  homepage,
+  naverModoo,
+  naverBlog,
+  naverCafe,
+  instagram,
+  facebook,
+}
+
+typedef SnsEntry = MapEntry<SnsType, String>;
+
 @JsonSerializable(explicitToJson: true)
 class Sns extends Equatable {
   const Sns({
@@ -40,4 +53,27 @@ class Sns extends Equatable {
         instagram,
         facebook,
       ];
+
+  List<SnsEntry> get sortedSnsEntries {
+    final sorted = <SnsEntry>[];
+
+    if (kakaoTalk != null) {
+      sorted.add(MapEntry(SnsType.kakaoTalk, kakaoTalk!));
+    }
+    if (instagram != null) {
+      sorted.add(MapEntry(SnsType.instagram, instagram!));
+    }
+    if (homepage != null) {
+      sorted.add(MapEntry(SnsType.homepage, homepage!));
+    }
+    if (naverBlog != null) {
+      sorted.add(MapEntry(SnsType.naverBlog, naverBlog!));
+    }
+    if (naverCafe != null) {
+      sorted.add(MapEntry(SnsType.naverCafe, naverCafe!));
+    }
+    // TODO(ghrud92): 나머지 SNS 추가
+
+    return sorted;
+  }
 }
