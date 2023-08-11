@@ -2,9 +2,11 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 import '../../../repository/academy/sns.dart';
+import '../../../repository/academy/teacher.dart';
 import '../../../shared/widget/app_bar_action_button.dart';
 import '../../../shared/widget/app_bar_leading_button.dart';
 import 'academy_default_info.dart';
+import 'teacher_profile_list.dart';
 
 class AcademyView extends StatelessWidget {
   const AcademyView({
@@ -14,6 +16,7 @@ class AcademyView extends StatelessWidget {
     required this.address,
     required this.phone,
     required this.sns,
+    required this.teachers,
     super.key,
   });
 
@@ -23,6 +26,7 @@ class AcademyView extends StatelessWidget {
   final String address;
   final List<String> phone;
   final Sns sns;
+  final List<Teacher> teachers;
 
   @override
   Widget build(BuildContext context) => Container(
@@ -148,6 +152,7 @@ class AcademyView extends StatelessWidget {
                   thickness: 7,
                   color: Color(0xFFF4F4F4),
                 ),
+                TeacherProfileList(teachers: teachers),
               ],
             ),
           ),
