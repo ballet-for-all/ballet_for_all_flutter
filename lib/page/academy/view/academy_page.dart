@@ -129,6 +129,7 @@ flutter: Teacher(정유미, 학력
       address: dummyAcademy.address,
       phone: dummyAcademy.phone,
       sns: dummyAcademy.sns,
+      teachers: dummyAcademy.teachers,
     );
   }
 }
