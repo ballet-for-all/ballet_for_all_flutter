@@ -20,7 +20,7 @@ class MainView extends GetView<MainController> {
           actions: [
             AppBarActionButton(
               onPressed: () {},
-              label: '${controller.myLocation.value} ?? ' '',
+              label: '${controller.myLocation.value}',
               icon: Icons.keyboard_arrow_down,
             ),
             const SizedBox(width: 5),

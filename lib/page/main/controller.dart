@@ -13,6 +13,7 @@ class MainController extends GetxController {
   void onInit() async {
     super.onInit();
     list.value = await mainRepository.listAcademies();
-    myLocation.value = '강남구';
+    final myLocationArg = Get.arguments;
+    myLocation.value = myLocationArg;
   }
 }

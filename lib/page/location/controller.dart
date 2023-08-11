@@ -58,14 +58,10 @@ class LocationController extends GetxController {
     settingBtnChk.value = false;
   }
 
-  Future<void> selectBlock(int i, int j) async {
-    //blocks.value = [];
-    blocks.value = districts[i].blocks;
-    selectedBlock.value = j;
+  Future<void> selectBlock(int i) async {
+    selectedBlock.value = i;
     settingBtnChk.value = true;
   }
-
-  void selectdis(String i, int k) {}
 
   void searchText(String text) {
     districts.value = cities[0].districts;
@@ -77,6 +73,6 @@ class LocationController extends GetxController {
   }
 
   void onSettingClick() async {
-    Get.toNamed(Routes.splash);
+    Get.toNamed(Routes.main, arguments: blocks[selectedBlock.value].name);
   }
 }
