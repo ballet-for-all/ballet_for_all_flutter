@@ -1,4 +1,7 @@
 import 'package:get/route_manager.dart';
+
+import '../page/academy/academy_binding.dart';
+import '../page/academy/academy_page.dart';
 import '../page/location/location_binding.dart';
 import '../page/location/location_pages.dart';
 import '../page/main/main_binding.dart';
@@ -22,5 +25,9 @@ class AppPages {
         name: LocationPage.routeName,
         page: () => const LocationPage(),
         binding: LocationBinding()),
+    GetPage(
+        name: AcademyPage.routeName,
+        page: () => const AcademyPage(),
+        binding: AcademyBinding()),
   ];
 }

@@ -1,14 +1,13 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-import '../../academy/view/academy_page.dart';
 import 'class_info.dart';
 
 class AcademyListTile extends StatefulWidget {
   const AcademyListTile({
     required this.id,
+    required this.onPressed,
     required this.academyImages,
     required this.academyName,
     required this.academyAddress,
@@ -19,6 +18,7 @@ class AcademyListTile extends StatefulWidget {
   }) : super(key: key);
 
   final String id;
+  final VoidCallback onPressed;
   final List<String> academyImages;
   final String academyName;
   final String academyAddress;
@@ -45,9 +45,7 @@ class _AcademyListTileState extends State<AcademyListTile> {
   Widget build(BuildContext context) => Padding(
         padding: const EdgeInsets.only(bottom: 16, left: 24, right: 24),
         child: InkWell(
-          onTap: () {
-            Get.to(AcademyPage(id: widget.id));
-          },
+          onTap: () => widget.onPressed(),
           child: Container(
             clipBehavior: Clip.hardEdge,
             decoration: BoxDecoration(
