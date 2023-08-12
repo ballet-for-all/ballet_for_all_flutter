@@ -81,6 +81,7 @@ class MainPage extends GetView<MainController> {
                 delegate: SliverChildBuilderDelegate(
                   (context, index) => AcademyListTile(
                     id: controller.AcademyList[index].id,
+                    onPressed: () => controller.onAcademyClick(index),
                     academyImages: controller.AcademyList[index].images,
                     academyName: controller.AcademyList[index].name,
                     academyAddress: controller.AcademyList[index].address,

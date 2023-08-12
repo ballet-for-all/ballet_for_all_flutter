@@ -1,21 +1,24 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-import '../../../repository/academy/academy.dart';
-import '../../../repository/academy/location.dart';
-import '../../../repository/academy/sns.dart';
-import '../../../repository/academy/teacher.dart';
-import 'academy_view.dart';
+import '../../repository/academy/academy.dart';
+import '../../repository/academy/location.dart';
+import '../../repository/academy/sns.dart';
+import '../../repository/academy/teacher.dart';
 
-@RoutePage()
-class AcademyPage extends StatelessWidget {
-  const AcademyPage({@PathParam('id') required this.id, super.key});
+class AcademyController extends GetxController {
+  AcademyController();
 
-  final String id;
+  final academy = Rxn<Academy>();
 
   @override
-  Widget build(BuildContext context) {
-    // TODO(ghrud92): 실제 데이터 연동
+  void onInit() {
+    super.onInit();
+    final id = Get.arguments;
+    fetchAcademy(id as String);
+  }
+
+  Future<void> fetchAcademy(String id) async {
+    // TODO(ghrud92): 실제 데이터 사용하기
     const sns = Sns(
       kakaoTalk: 'as바디',
       naverBlog: 'https://blog.naver.com/as_body_',
@@ -101,7 +104,7 @@ flutter: Teacher(정유미, 학력
           imageUrl:
               'https://postfiles.pstatic.net/MjAxOTEyMTBfMjc4/MDAxNTc1OTM4Njg2NTky.5gOcsQpmKR9h68hM6MpPZRpmf1DQ605Or3Rf5jdgNGMg.YQf1AQTmu4PDnTOnBaXpV_wD2u4NzVmyoP6B6rQujaQg.JPEG.as_body_/%EC%82%AC%EB%B3%B8_-%EA%B9%80%EC%9D%80%EC%A0%95%EA%B0%95%EC%82%AC.jpg?type=w773'),
     ];
-    final Academy dummyAcademy = Academy(
+    final dummyAcademy = Academy(
       id: id,
       name: '에이에스바디 도곡본점',
       address: '서울 강남구 논현로28길 53 대하빌딩 2층',
@@ -121,15 +124,6 @@ flutter: Teacher(정유미, 학력
         block: '도곡동',
       ),
     );
-
-    return AcademyView(
-      id: id,
-      images: dummyAcademy.images,
-      name: dummyAcademy.name,
-      address: dummyAcademy.address,
-      phone: dummyAcademy.phone,
-      sns: dummyAcademy.sns,
-      teachers: dummyAcademy.teachers,
-    );
+    academy.value = dummyAcademy;
   }
 }
