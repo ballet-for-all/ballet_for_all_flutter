@@ -6,9 +6,7 @@ linter:
   - always_put_control_body_on_new_line
   - always_put_required_named_parameters_first
   - avoid_dynamic_calls
-  - avoid_relative_lib_imports
   - avoid_slow_async_io
-  - avoid_types_as_parameter_names
   - avoid_types_on_closure_parameters
   - avoid_bool_literals_in_conditional_expressions
   - avoid_catches_without_on_clauses
@@ -19,4 +17,3 @@ linter:
   - prefer_relative_imports
   - prefer_single_quotes
   - unnecessary_statements
-  - unrelated_type_equality_checks
