@@ -1,26 +1,25 @@
 import 'package:get/route_manager.dart';
-import '../page/location/binding.dart';
-import '../page/location/pages.dart';
-import '../page/main/binding.dart';
-import '../page/main/pages.dart';
-import '../page/sign_up/binding.dart';
-import '../page/sign_up/pages.dart';
-import 'app_routes.dart';
+import '../page/location/location_binding.dart';
+import '../page/location/location_pages.dart';
+import '../page/main/main_binding.dart';
+import '../page/main/main_pages.dart';
+import '../page/sign_up/sign_up_binding.dart';
+import '../page/sign_up/sign_up_pages.dart';
 
 class AppPages {
-  static const initialPage = Routes.signup;
+  static const initialPage = SignUpView.routeName;
 
   static final routes = [
     GetPage(
-        name: Routes.main,
+        name: MainView.routeName,
         page: () => const MainView(),
         binding: MainBinding()),
     GetPage(
-        name: Routes.signup,
+        name: SignUpView.routeName,
         page: () => const SignUpView(),
         binding: SignUpBinding()),
     GetPage(
-        name: Routes.location,
+        name: LocationPage.routeName,
         page: () => const LocationPage(),
         binding: LocationBinding()),
   ];

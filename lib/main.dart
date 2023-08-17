@@ -33,7 +33,6 @@ class MyApp extends StatelessWidget {
             Theme.of(context).textTheme,
           ),
         ),
-        debugShowCheckedModeBanner: false,
         initialRoute: AppPages.initialPage,
         getPages: AppPages.routes,
         locale: Get.deviceLocale,

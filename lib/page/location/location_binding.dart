@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'controller.dart';
+import 'location_controller.dart';
 
 class LocationBinding extends Bindings {
   @override

@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
 import '../../repository/academy/academy_repository.dart';
-import 'controller.dart';
+import 'main_controller.dart';
 
 class MainBinding extends Bindings {
   @override

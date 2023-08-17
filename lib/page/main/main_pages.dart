@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import '../../../shared/widget/app_bar_action_button.dart';
-import 'controller.dart';
+import 'main_controller.dart';
 import 'widget/academy_list_title.dart';
 
-//mainview쪽
 class MainView extends GetView<MainController> {
+  static const routeName = '/main';
+
   const MainView({super.key});
 
   @override
@@ -20,7 +21,7 @@ class MainView extends GetView<MainController> {
           actions: [
             AppBarActionButton(
               onPressed: () {},
-              label: '${controller.myLocation.value}',
+              label: controller.myLocation.value,
               icon: Icons.keyboard_arrow_down,
             ),
             const SizedBox(width: 5),
@@ -49,7 +50,7 @@ class MainView extends GetView<MainController> {
                     color: const Color(0xFF5282FF),
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: const Padding(
+                  child: Padding(
                     padding: EdgeInsets.only(left: 30),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -79,16 +80,16 @@ class MainView extends GetView<MainController> {
               SliverList(
                 delegate: SliverChildBuilderDelegate(
                   (context, index) => AcademyListTile(
-                    id: controller.list[index].id,
-                    academyImages: controller.list[index].images,
-                    academyName: controller.list[index].name,
-                    academyAddress: controller.list[index].address,
-                    regularPrice: controller.list[index].minRegularPrice,
-                    couponPrice: controller.list[index].minCouponPrice,
+                    id: controller.AcademyList[index].id,
+                    academyImages: controller.AcademyList[index].images,
+                    academyName: controller.AcademyList[index].name,
+                    academyAddress: controller.AcademyList[index].address,
+                    regularPrice: controller.AcademyList[index].minRegularPrice,
+                    couponPrice: controller.AcademyList[index].minCouponPrice,
                     pieceClassDescription:
-                        controller.list[index].pieceClassDescription,
+                        controller.AcademyList[index].pieceClassDescription,
                   ),
-                  childCount: controller.list.length,
+                  childCount: controller.AcademyList.length,
                 ),
               ),
             ],

@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-import 'page/location/controller.dart';
+import 'page/location/location_controller.dart';
 import 'repository/city/location_repository.dart';
 
 class AppBinding extends Bindings {

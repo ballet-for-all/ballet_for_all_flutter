@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../shared/widget/safe_bottom_button.dart';
-import 'controller.dart';
+import 'location_controller.dart';
 import './widget/location_list_item.dart';
 
-class LocationPage extends GetView<LocationController> {
-  const LocationPage({super.key});
+const _borderSide = BorderSide(color: Color(0xFFCCCCCC), width: 1);
 
-  final _borderSide = const BorderSide(color: Color(0xFFCCCCCC), width: 1);
+class LocationPage extends GetView<LocationController> {
+  static const routeName = '/location';
+
+  const LocationPage({super.key});
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -143,7 +145,7 @@ class LocationPage extends GetView<LocationController> {
                   ],
                 ),
               ),
-              controller.settingBtnChk.value
+              controller.isSettingBtnClickable.value
                   ? SafeBottomButton(
                       onTap: () {
                         controller.onSettingClick();

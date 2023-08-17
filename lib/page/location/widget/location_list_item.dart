@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import '../controller.dart';
+import '../location_controller.dart';
 
 class LocationListItem extends GetView<LocationController> {
   const LocationListItem({
     required this.text,
+    required this.onTap,
     this.selected = false,
-    this.onTap,
     Key? key,
   }) : super(key: key);
 
   final String text;
   final bool selected;
-  final VoidCallback? onTap;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) => InkWell(

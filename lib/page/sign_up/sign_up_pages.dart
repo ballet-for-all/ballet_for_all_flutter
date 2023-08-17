@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-import 'controller.dart';
+import 'sign_up_controller.dart';
 import 'widget/login_button.dart';
 
 class SignUpView extends GetView<SignUpPageController> {
+  static const routeName = '/signup';
+
   const SignUpView({super.key});
 
   @override

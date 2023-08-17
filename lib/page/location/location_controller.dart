@@ -3,22 +3,17 @@ import '../../repository/city/block.dart';
 import '../../repository/city/city.dart';
 import '../../repository/city/district.dart';
 import '../../repository/city/location_repository.dart';
-import '../../routes/app_routes.dart';
+import '../main/main_pages.dart';
 
 class LocationController extends GetxController {
   final repository = Get.put(LocationRepository());
   final cities = <City>[].obs;
   final districts = <District>[].obs;
-  RxList blocks = <Block>[].obs;
-  RxInt selectedCity = 0.obs;
-  RxInt selectedDistrict = 0.obs;
-  RxInt selectedBlock = 0.obs;
-  RxBool settingBtnChk = false.obs;
-  RxBool select = false.obs;
-  RxBool selectBlockBool = false.obs;
-  List<Block> list = <Block>[];
-  List<District> listDistrict = [];
-  Set<dynamic> listBlock = {};
+  final blocks = <Block>[].obs;
+  final selectedCity = 0.obs;
+  final selectedDistrict = 0.obs;
+  final selectedBlock = 0.obs;
+  final isSettingBtnClickable = false.obs;
 
   @override
   void onInit() async {
@@ -35,10 +30,16 @@ class LocationController extends GetxController {
         name: '전체',
         blocks: blocksOfAllDistricts,
       );
+      final districts = [allDistrict, ...city.districts]
+          .where((district) => district.name.isNotEmpty)
+          .map((district) {
+        final blocks = [const Block(name: '전체'), ...district.blocks];
+        return District(name: district.name, blocks: blocks);
+      }).toList();
 
       return City(
         name: city.name,
-        districts: city.districts,
+        districts: districts,
       );
     }).toList();
   }
@@ -48,19 +49,19 @@ class LocationController extends GetxController {
     selectedCity.value = i;
     selectedDistrict.value = -1;
     selectedBlock.value = -1;
-    settingBtnChk.value = false;
+    isSettingBtnClickable.value = false;
   }
 
   Future<void> selectDistrict(int i) async {
     blocks.value = districts[i].blocks;
     selectedDistrict.value = i;
     selectedBlock.value = -1;
-    settingBtnChk.value = false;
+    isSettingBtnClickable.value = false;
   }
 
   Future<void> selectBlock(int i) async {
     selectedBlock.value = i;
-    settingBtnChk.value = true;
+    isSettingBtnClickable.value = true;
   }
 
   void searchText(String text) {
@@ -73,6 +74,7 @@ class LocationController extends GetxController {
   }
 
   void onSettingClick() async {
-    Get.toNamed(Routes.main, arguments: blocks[selectedBlock.value].name);
+    Get.toNamed(MainView.routeName,
+        arguments: blocks[selectedBlock.value].name);
   }
 }
