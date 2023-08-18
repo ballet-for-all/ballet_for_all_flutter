@@ -13,7 +13,6 @@ class LocationController extends GetxController {
   final selectedCity = 0.obs;
   final selectedDistrict = 0.obs;
   final selectedBlock = 0.obs;
-  final isSettingBtnClickable = false.obs;
 
   @override
   void onInit() async {
@@ -49,19 +48,16 @@ class LocationController extends GetxController {
     selectedCity.value = i;
     selectedDistrict.value = -1;
     selectedBlock.value = -1;
-    isSettingBtnClickable.value = false;
   }
 
   Future<void> selectDistrict(int i) async {
     blocks.value = districts[i].blocks;
     selectedDistrict.value = i;
     selectedBlock.value = -1;
-    isSettingBtnClickable.value = false;
   }
 
   Future<void> selectBlock(int i) async {
     selectedBlock.value = i;
-    isSettingBtnClickable.value = true;
   }
 
   void searchText(String text) {

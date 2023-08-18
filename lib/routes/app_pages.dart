@@ -7,7 +7,7 @@ import '../page/sign_up/sign_up_binding.dart';
 import '../page/sign_up/sign_up_pages.dart';
 
 class AppPages {
-  static const initialPage = SignUpView.routeName;
+  static const initialPage = SignUpPage.routeName;
 
   static final routes = [
     GetPage(
@@ -15,8 +15,8 @@ class AppPages {
         page: () => const MainView(),
         binding: MainBinding()),
     GetPage(
-        name: SignUpView.routeName,
-        page: () => const SignUpView(),
+        name: SignUpPage.routeName,
+        page: () => const SignUpPage(),
         binding: SignUpBinding()),
     GetPage(
         name: LocationPage.routeName,

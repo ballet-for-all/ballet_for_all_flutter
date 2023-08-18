@@ -38,5 +38,9 @@ class MyApp extends StatelessWidget {
         locale: Get.deviceLocale,
         defaultTransition: Transition.fade,
         initialBinding: AppBinding(),
+        builder: (context, child) => MediaQuery(
+          data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+          child: child!,
+        ),
       );
 }

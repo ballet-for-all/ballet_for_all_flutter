@@ -5,10 +5,10 @@ import 'package:get/get.dart';
 import 'sign_up_controller.dart';
 import 'widget/login_button.dart';
 
-class SignUpView extends GetView<SignUpPageController> {
+class SignUpPage extends GetView<SignUpPageController> {
   static const routeName = '/signup';
 
-  const SignUpView({super.key});
+  const SignUpPage({super.key});
 
   @override
   Widget build(BuildContext context) => Scaffold(

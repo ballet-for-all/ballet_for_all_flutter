@@ -84,7 +84,7 @@ class LocationPage extends GetView<LocationController> {
                   children: [
                     Expanded(
                       child: Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           border: Border(top: _borderSide, right: _borderSide),
                         ),
                         child: ListView.builder(
@@ -104,7 +104,7 @@ class LocationPage extends GetView<LocationController> {
                     ),
                     Expanded(
                       child: Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           border: Border(top: _borderSide),
                         ),
                         child: ListView.builder(
@@ -124,7 +124,7 @@ class LocationPage extends GetView<LocationController> {
                     ),
                     Expanded(
                       child: Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           border: Border(top: _borderSide, left: _borderSide),
                         ),
                         child: ListView.builder(
@@ -145,7 +145,7 @@ class LocationPage extends GetView<LocationController> {
                   ],
                 ),
               ),
-              controller.isSettingBtnClickable.value
+              controller.selectedBlock.value != -1
                   ? SafeBottomButton(
                       onTap: () {
                         controller.onSettingClick();
