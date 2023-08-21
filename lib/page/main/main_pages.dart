@@ -5,10 +5,10 @@ import '../../../shared/widget/app_bar_action_button.dart';
 import 'main_controller.dart';
 import 'widget/academy_list_title.dart';
 
-class MainView extends GetView<MainController> {
+class MainPage extends GetView<MainController> {
   static const routeName = '/main';
 
-  const MainView({super.key});
+  const MainPage({super.key});
 
   @override
   Widget build(BuildContext context) => Obx(() => Scaffold(

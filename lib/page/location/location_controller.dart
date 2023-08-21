@@ -70,7 +70,7 @@ class LocationController extends GetxController {
   }
 
   void onSettingClick() async {
-    Get.toNamed(MainView.routeName,
+    Get.toNamed(MainPage.routeName,
         arguments: blocks[selectedBlock.value].name);
   }
 }
