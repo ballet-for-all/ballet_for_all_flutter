@@ -1,5 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+import '../../firebase/firestore_collection.dart';
 import 'academy.dart';
 
-abstract class AcademyRepository {
-  Future<List<Academy>> listAcademies();
+class AcademyRepository extends FirestoreCollection {
+  Future<List<Academy>> listAcademies() async {
+    final academyJsonList =
+        await FirebaseFirestore.instance.collection('academies').get();
+    final academies = academyJsonList.docs.map((doc) => docToMap(doc)).toList();
+    return academies
+        .map((academyJson) => Academy.fromJson(academyJson))
+        .toList();
+  }
 }
