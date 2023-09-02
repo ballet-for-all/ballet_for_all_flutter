@@ -1,9 +1,9 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../shared/widget/app_bar_action_button.dart';
 import '../../../shared/widget/app_bar_leading_button.dart';
+import '../../shared/widget/image_carousel.dart';
 import '../../shared/widget/persistent_header_delegate.dart';
 import 'academy_controller.dart';
 import 'widget/academy_default_info.dart';
@@ -55,21 +55,9 @@ class AcademyPage extends GetView<AcademyController> {
                       collapseMode: CollapseMode.pin,
                       background: Column(
                         children: [
-                          CarouselSlider.builder(
-                            options: CarouselOptions(
-                              height: _carouselImageHeight,
-                              viewportFraction: 1,
-                              enableInfiniteScroll: false,
-                            ),
-                            itemCount: academy.images.length,
-                            itemBuilder: (context, index, realIndex) =>
-                                SizedBox(
-                              width: double.infinity,
-                              child: Image.network(
-                                academy.images[index],
-                                fit: BoxFit.fitWidth,
-                              ),
-                            ),
+                          ImageCarousel(
+                            height: _carouselImageHeight,
+                            images: academy.images,
                           ),
                           // TODO(ghrud92): Carousel indicator 추가
                           AcademyDefaultInfo(
