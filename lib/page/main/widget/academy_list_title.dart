@@ -1,10 +1,9 @@
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 
+import '../../../shared/widget/image_carousel.dart';
 import 'class_info.dart';
 
-class AcademyListTile extends StatefulWidget {
+class AcademyListTile extends StatelessWidget {
   const AcademyListTile({
     required this.id,
     required this.onPressed,
@@ -27,25 +26,10 @@ class AcademyListTile extends StatefulWidget {
   final String? pieceClassDescription;
 
   @override
-  State<AcademyListTile> createState() => _AcademyListTileState();
-}
-
-class _AcademyListTileState extends State<AcademyListTile> {
-  late final CarouselController _carouselController;
-
-  int _imageIndex = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    _carouselController = CarouselController();
-  }
-
-  @override
   Widget build(BuildContext context) => Padding(
         padding: const EdgeInsets.only(bottom: 16, left: 24, right: 24),
         child: InkWell(
-          onTap: () => widget.onPressed(),
+          onTap: onPressed,
           child: Container(
             clipBehavior: Clip.hardEdge,
             decoration: BoxDecoration(
@@ -54,42 +38,9 @@ class _AcademyListTileState extends State<AcademyListTile> {
             ),
             child: Column(
               children: [
-                Stack(
-                  children: [
-                    CarouselSlider.builder(
-                      carouselController: _carouselController,
-                      options: CarouselOptions(
-                        height: 202,
-                        viewportFraction: 1,
-                        enableInfiniteScroll: false,
-                        onPageChanged: (index, reason) => setState(() {
-                          _imageIndex = index;
-                        }),
-                      ),
-                      itemCount: widget.academyImages.length,
-                      itemBuilder: (context, index, realIndex) => SizedBox(
-                        width: double.infinity,
-                        child: Image.network(
-                          widget.academyImages[index],
-                          fit: BoxFit.fitWidth,
-                        ),
-                      ),
-                    ),
-                    Positioned.fill(
-                      bottom: 20,
-                      child: Align(
-                        alignment: Alignment.bottomCenter,
-                        child: DotsIndicator(
-                          dotsCount: widget.academyImages.length,
-                          position: _imageIndex,
-                          decorator: DotsDecorator(
-                            color: Colors.white.withOpacity(0.7),
-                            activeColor: const Color(0xFF222222),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+                ImageCarousel(
+                  height: 202,
+                  images: academyImages,
                 ),
                 Container(
                   color: Colors.white,
@@ -104,7 +55,7 @@ class _AcademyListTileState extends State<AcademyListTile> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  widget.academyName,
+                                  academyName,
                                   style: const TextStyle(
                                     color: Color(0xFF333333),
                                     fontSize: 18,
@@ -120,7 +71,7 @@ class _AcademyListTileState extends State<AcademyListTile> {
                                       size: 18,
                                     ),
                                     Text(
-                                      widget.academyAddress,
+                                      academyAddress,
                                       style: const TextStyle(
                                         fontSize: 14,
                                         color: Color(0xFFBBBBBB),
@@ -142,25 +93,25 @@ class _AcademyListTileState extends State<AcademyListTile> {
                       ClassInfo(
                         leadingIconPath: 'assets/icons/regular-class.svg',
                         title: '정규수업',
-                        price: widget.regularPrice,
+                        price: regularPrice,
                         showPerClass: true,
-                        exist: widget.regularPrice != null,
+                        exist: regularPrice != null,
                         notExistDescription: '정규 수업이 없어요',
                       ),
                       const SizedBox(height: 10),
                       ClassInfo(
                         leadingIconPath: 'assets/icons/coupon-class.svg',
                         title: '쿠폰수업',
-                        price: widget.couponPrice,
-                        exist: widget.couponPrice != null,
+                        price: couponPrice,
+                        exist: couponPrice != null,
                         notExistDescription: '쿠폰 수업이 없어요',
                       ),
                       const SizedBox(height: 10),
                       ClassInfo(
                         leadingIconPath: 'assets/icons/piece-class.svg',
                         title: '작품반',
-                        description: widget.pieceClassDescription,
-                        exist: widget.pieceClassDescription != null,
+                        description: pieceClassDescription,
+                        exist: pieceClassDescription != null,
                         notExistDescription: '작품 수업이 없어요',
                       )
                     ],
