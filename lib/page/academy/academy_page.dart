@@ -8,6 +8,7 @@ import '../../shared/widget/persistent_header_delegate.dart';
 import 'academy_controller.dart';
 import 'widget/academy_default_info.dart';
 import 'widget/academy_tab_bar.dart';
+import 'widget/facility_photo_grid.dart';
 import 'widget/teacher_profile_list.dart';
 
 const double _carouselImageHeight = 266;
@@ -81,6 +82,9 @@ class AcademyPage extends GetView<AcademyController> {
                   SliverToBoxAdapter(
                     child: TeacherProfileList(teachers: academy.teachers),
                   ),
+                  SliverToBoxAdapter(
+                    child: FacilityPhotoGrid(photos: academy.images),
+                  )
                 ],
               ),
             ),
