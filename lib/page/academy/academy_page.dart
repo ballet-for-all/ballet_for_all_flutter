@@ -30,6 +30,7 @@ class AcademyPage extends GetView<AcademyController> {
           child: SafeArea(
             child: Scaffold(
               body: CustomScrollView(
+                controller: controller.scrollController,
                 slivers: [
                   SliverAppBar(
                     leading: const AppBarLeadingButton(),
@@ -76,15 +77,39 @@ class AcademyPage extends GetView<AcademyController> {
                     delegate: PersistentHeaderDelegate(
                       minHeight: AcademyTabBar.height,
                       maxHeight: AcademyTabBar.height,
-                      child: const AcademyTabBar(),
+                      child: AcademyTabBar(
+                        currentTab: controller.currentTab.value,
+                        onTeacherTabPressed: () {
+                          Scrollable.ensureVisible(
+                            controller.teacherKey.currentContext!,
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.ease,
+                          );
+                        },
+                        onFacilityTabPressed: () {
+                          Scrollable.ensureVisible(
+                            controller.facilityKey.currentContext!,
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.ease,
+                          );
+                        },
+                        onTimetableTabPressed: () => debugPrint('시간표'),
+                        onCourceFeeTabPressed: () => debugPrint('수강료'),
+                      ),
                     ),
                   ),
                   SliverToBoxAdapter(
-                    child: TeacherProfileList(teachers: academy.teachers),
+                    child: TeacherProfileList(
+                      key: controller.teacherKey,
+                      teachers: academy.teachers,
+                    ),
                   ),
                   SliverToBoxAdapter(
-                    child: FacilityPhotoGrid(photos: academy.images),
-                  )
+                    child: FacilityPhotoGrid(
+                      key: controller.facilityKey,
+                      photos: academy.images,
+                    ),
+                  ),
                 ],
               ),
             ),
