@@ -1,9 +1,22 @@
 import 'package:flutter/material.dart';
 
 class AcademyTabBar extends StatelessWidget {
-  const AcademyTabBar({super.key});
+  const AcademyTabBar({
+    required this.currentTab,
+    required this.onTeacherTabPressed,
+    required this.onFacilityTabPressed,
+    required this.onTimetableTabPressed,
+    required this.onCourceFeeTabPressed,
+    super.key,
+  });
 
   static const double height = 60;
+
+  final int currentTab;
+  final VoidCallback onTeacherTabPressed;
+  final VoidCallback onFacilityTabPressed;
+  final VoidCallback onTimetableTabPressed;
+  final VoidCallback onCourceFeeTabPressed;
 
   @override
   Widget build(BuildContext context) => ColoredBox(
@@ -21,15 +34,13 @@ class AcademyTabBar extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       TextButton(
-                        // TODO(ghrud92): 스크롤 로직 추가
-                        onPressed: () {},
+                        onPressed: onTeacherTabPressed,
                         child: Text(
-                          '강사소개',
-                          // TODO(ghrud92): 현재 보고 있는 위치 계산하는 로직 추가
-                          style: _tabButtonStyle(true),
+                          '강사 소개',
+                          style: _tabButtonStyle(currentTab == 0),
                         ),
                       ),
-                      _tabIndicator(true),
+                      _tabIndicator(currentTab == 0),
                     ],
                   ),
                 ),
@@ -38,13 +49,13 @@ class AcademyTabBar extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       TextButton(
-                        onPressed: () {},
+                        onPressed: onFacilityTabPressed,
                         child: Text(
                           '시설 사진',
-                          style: _tabButtonStyle(false),
+                          style: _tabButtonStyle(currentTab == 1),
                         ),
                       ),
-                      _tabIndicator(false),
+                      _tabIndicator(currentTab == 1),
                     ],
                   ),
                 ),
@@ -53,13 +64,13 @@ class AcademyTabBar extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       TextButton(
-                        onPressed: () {},
+                        onPressed: onTimetableTabPressed,
                         child: Text(
                           '시간표',
-                          style: _tabButtonStyle(false),
+                          style: _tabButtonStyle(currentTab == 2),
                         ),
                       ),
-                      _tabIndicator(false),
+                      _tabIndicator(currentTab == 2),
                     ],
                   ),
                 ),
@@ -68,13 +79,13 @@ class AcademyTabBar extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       TextButton(
-                        onPressed: () {},
+                        onPressed: onCourceFeeTabPressed,
                         child: Text(
                           '수강료',
-                          style: _tabButtonStyle(false),
+                          style: _tabButtonStyle(currentTab == 3),
                         ),
                       ),
-                      _tabIndicator(false),
+                      _tabIndicator(currentTab == 3),
                     ],
                   ),
                 ),
