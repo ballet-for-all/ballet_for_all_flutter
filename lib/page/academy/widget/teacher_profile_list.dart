@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../repository/academy/teacher.dart';
 import '../../../shared/extension/widget_list_extension.dart';
+import 'section_header.dart';
 import 'teacher_profile_tile.dart';
 
 const _maxTeacherProfileCount = 3;
@@ -18,31 +19,9 @@ class TeacherProfileList extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
           child: Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    '강사 소개',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                      color: Color(0xFF222222),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 30,
-                    child: TextButton(
-                      onPressed: () {},
-                      child: const Text(
-                        '전체보기',
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Color(0xFF0066FF),
-                        ),
-                      ),
-                    ),
-                  )
-                ],
+              SectionHeader(
+                title: '강사 소개',
+                onShowAll: () => debugPrint('강사 소개'),
               ),
               const SizedBox(height: 10),
               Column(
