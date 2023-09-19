@@ -10,7 +10,8 @@ import '../page/sign_up/sign_up_binding.dart';
 import '../page/sign_up/sign_up_pages.dart';
 
 class AppPages {
-  static const initialPage = SignUpPage.routeName;
+  // static const initialPage = SignUpPage.routeName;
+  static const initialPage = LocationPage.routeName;
 
   static final routes = [
     GetPage(

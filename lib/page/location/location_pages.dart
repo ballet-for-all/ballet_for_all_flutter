@@ -68,6 +68,7 @@ class LocationPage extends GetView<LocationController> {
                     IconButton(
                       padding: EdgeInsets.zero,
                       onPressed: () {
+                        controller.geoLocation();
                         // TODO(ghrud92): 위치 권한 요청 & 현재 위치로 동네 변경
                       },
                       icon: Image.asset(

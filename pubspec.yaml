@@ -1,11 +1,11 @@
 name: ballet_for_all_flutter
 description: Flutter app for 모두의 발레
-publish_to: 'none'
+publish_to: "none"
 
 version: 0.0.7+7
 
 environment:
-  sdk: '>=2.19.0 <3.0.0'
+  sdk: ">=2.19.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -24,7 +24,9 @@ dependencies:
   intl: ^0.18.1
   google_fonts: ^4.0.4
   get: ^4.6.5
-
+  geolocator: ^10.0.0
+  http: ^1.1.0
+  kakao_flutter_sdk: ^1.5.0
 
 dev_dependencies:
   flutter_test:
@@ -40,5 +42,5 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-  - assets/icons/
-  - assets/images/
+    - assets/icons/
+    - assets/images/
