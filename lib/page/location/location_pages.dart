@@ -80,72 +80,80 @@ class LocationPage extends GetView<LocationController> {
                   ],
                 ),
               ),
-              Expanded(
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        decoration: const BoxDecoration(
-                          border: Border(top: _borderSide, right: _borderSide),
-                        ),
-                        child: ListView.builder(
-                          itemBuilder: (context, i) {
-                            final city = controller.cities[i];
-                            return LocationListItem(
-                              text: city.name,
-                              selected: controller.selectedCity.value == i,
-                              onTap: () {
-                                controller.selectCity(i);
-                              },
-                            );
-                          },
-                          itemCount: controller.cities.length,
-                        ),
+              controller.isLoading.value == false
+                  ? Expanded(
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Container(
+                              decoration: const BoxDecoration(
+                                border: Border(
+                                    top: _borderSide, right: _borderSide),
+                              ),
+                              child: ListView.builder(
+                                itemBuilder: (context, i) {
+                                  final city = controller.cities[i];
+                                  return LocationListItem(
+                                    text: city.name,
+                                    selected:
+                                        controller.selectedCity.value == i,
+                                    onTap: () {
+                                      controller.selectCity(i);
+                                    },
+                                  );
+                                },
+                                itemCount: controller.cities.length,
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Container(
+                              decoration: const BoxDecoration(
+                                border: Border(top: _borderSide),
+                              ),
+                              child: ListView.builder(
+                                itemBuilder: (context, i) {
+                                  final district = controller.districts[i];
+                                  return LocationListItem(
+                                    text: district.name,
+                                    selected:
+                                        controller.selectedDistrict.value == i,
+                                    onTap: () {
+                                      controller.selectDistrict(i);
+                                    },
+                                  );
+                                },
+                                itemCount: controller.districts.length,
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Container(
+                              decoration: const BoxDecoration(
+                                border:
+                                    Border(top: _borderSide, left: _borderSide),
+                              ),
+                              child: ListView.builder(
+                                itemBuilder: (context, i) {
+                                  final block = controller.blocks[i];
+                                  return Obx(() => LocationListItem(
+                                        text: block.name,
+                                        selected:
+                                            controller.selectedBlock.value == i,
+                                        onTap: () {
+                                          controller.selectBlock(i);
+                                        },
+                                      ));
+                                },
+                                itemCount: controller.blocks.length,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        decoration: const BoxDecoration(
-                          border: Border(top: _borderSide),
-                        ),
-                        child: ListView.builder(
-                          itemBuilder: (context, i) {
-                            final district = controller.districts[i];
-                            return LocationListItem(
-                              text: district.name,
-                              selected: controller.selectedDistrict.value == i,
-                              onTap: () {
-                                controller.selectDistrict(i);
-                              },
-                            );
-                          },
-                          itemCount: controller.districts.length,
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        decoration: const BoxDecoration(
-                          border: Border(top: _borderSide, left: _borderSide),
-                        ),
-                        child: ListView.builder(
-                          itemBuilder: (context, i) {
-                            final block = controller.blocks[i];
-                            return Obx(() => LocationListItem(
-                                  text: block.name,
-                                  selected: controller.selectedBlock.value == i,
-                                  onTap: () {
-                                    controller.selectBlock(i);
-                                  },
-                                ));
-                          },
-                          itemCount: controller.blocks.length,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+                    )
+                  : const Expanded(
+                      child: Center(child: CircularProgressIndicator())),
               controller.selectedBlock.value != -1
                   ? SafeBottomButton(
                       onTap: () {
