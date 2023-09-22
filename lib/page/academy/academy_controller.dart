@@ -12,6 +12,7 @@ class AcademyController extends GetxController {
   final scrollController = ScrollController();
   final teacherKey = GlobalKey();
   final facilityKey = GlobalKey();
+  final timetableKey = GlobalKey();
 
   @override
   void onInit() {
