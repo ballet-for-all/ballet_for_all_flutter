@@ -10,6 +10,7 @@ import 'widget/academy_default_info.dart';
 import 'widget/academy_tab_bar.dart';
 import 'widget/facility_photo_grid.dart';
 import 'widget/teacher_profile_list.dart';
+import 'widget/timetable_section.dart';
 
 const double _carouselImageHeight = 266;
 
@@ -93,7 +94,13 @@ class AcademyPage extends GetView<AcademyController> {
                             curve: Curves.ease,
                           );
                         },
-                        onTimetableTabPressed: () => debugPrint('시간표'),
+                        onTimetableTabPressed: () {
+                          Scrollable.ensureVisible(
+                            controller.timetableKey.currentContext!,
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.ease,
+                          );
+                        },
                         onCourceFeeTabPressed: () => debugPrint('수강료'),
                       ),
                     ),
@@ -108,6 +115,12 @@ class AcademyPage extends GetView<AcademyController> {
                     child: FacilityPhotoGrid(
                       key: controller.facilityKey,
                       photos: academy.images,
+                    ),
+                  ),
+                  SliverToBoxAdapter(
+                    child: TimetableSection(
+                      key: controller.timetableKey,
+                      timetables: academy.timetables ?? const [],
                     ),
                   ),
                 ],
