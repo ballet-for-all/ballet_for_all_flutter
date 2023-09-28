@@ -80,11 +80,19 @@ class TimetableGrid extends StatelessWidget {
         right: 0,
         top: boxTop,
         height: boxHeight,
-        child: InkWell(
-          onTap: () {
-            // TODO(ghrud92): Show class detail popup
-            debugPrint(clazz.className);
-          },
+        child: Tooltip(
+          triggerMode: TooltipTriggerMode.tap,
+          message: '$name\n${schedule.startTime} - ${schedule.endTime}',
+          textStyle: const TextStyle(
+            fontSize: 16,
+            color: Color(0xFF222222),
+          ),
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          //
           child: Container(
             color: _getBoxColor(schedule),
             padding: const EdgeInsets.all(3),
@@ -104,8 +112,8 @@ class TimetableGrid extends StatelessWidget {
 
   double _getBoxTop(Schedule schedule) {
     final startHour = schedule.startHour;
-    final startMinute = schedule.startMinute;
-    final startIndex = startHour * 2 + (startMinute / 30).round();
+    final startMinutes = schedule.startMinutes;
+    final startIndex = startHour * 2 + (startMinutes / 30).round();
     // NOTE: 06:30의 index를 0으로 만들기 위해 13을 빼줌
     return halfHourHeight * (startIndex - 13);
   }
