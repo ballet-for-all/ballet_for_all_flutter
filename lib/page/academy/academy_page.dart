@@ -121,6 +121,10 @@ class AcademyPage extends GetView<AcademyController> {
                     child: TimetableSection(
                       key: controller.timetableKey,
                       timetables: academy.timetables ?? const [],
+                      selectedIndex: controller.currentTimetableIndex.value,
+                      onTimetableSelected: (index) {
+                        controller.currentTimetableIndex.value = index;
+                      },
                     ),
                   ),
                 ],

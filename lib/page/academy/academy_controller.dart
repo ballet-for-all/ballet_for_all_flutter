@@ -13,6 +13,7 @@ class AcademyController extends GetxController {
   final teacherKey = GlobalKey();
   final facilityKey = GlobalKey();
   final timetableKey = GlobalKey();
+  final currentTimetableIndex = 0.obs;
 
   @override
   void onInit() {
