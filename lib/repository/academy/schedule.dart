@@ -27,5 +27,12 @@ class Schedule extends Equatable {
 
   int get startHour => int.parse(startTime.split(':')[0]);
 
-  int get startMinute => int.parse(startTime.split(':')[1]);
+  int get startMinutes => int.parse(startTime.split(':')[1]);
+
+  String get endTime {
+    final endHour =
+        startHour + ((startMinutes + durationInMinutes) / 60).floor();
+    final endMinutes = (startMinutes + durationInMinutes) % 60;
+    return '$endHour:$endMinutes';
+  }
 }
