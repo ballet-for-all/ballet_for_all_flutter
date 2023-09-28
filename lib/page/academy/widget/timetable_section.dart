@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../repository/academy/timetable.dart';
-import '../../../shared/widget/timetable_grid.dart';
+import '../../../shared/widget/timetable_grid/timetable_grid.dart';
 import 'section_header.dart';
 
 class TimetableSection extends StatelessWidget {
