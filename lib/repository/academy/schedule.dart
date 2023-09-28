@@ -24,4 +24,8 @@ class Schedule extends Equatable {
 
   @override
   List<Object?> get props => [startTime, durationInMinutes, day, teacherName];
+
+  int get startHour => int.parse(startTime.split(':')[0]);
+
+  int get startMinute => int.parse(startTime.split(':')[1]);
 }
