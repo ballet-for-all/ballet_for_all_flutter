@@ -69,7 +69,6 @@ class LocationPage extends GetView<LocationController> {
                       padding: EdgeInsets.zero,
                       onPressed: () {
                         controller.geoLocation();
-                        // TODO(ghrud92): 위치 권한 요청 & 현재 위치로 동네 변경
                       },
                       icon: Image.asset(
                         'assets/icons/location.png',
@@ -80,7 +79,7 @@ class LocationPage extends GetView<LocationController> {
                   ],
                 ),
               ),
-              controller.isLoading.value == false
+              !controller.isLoading.value
                   ? Expanded(
                       child: Row(
                         children: [

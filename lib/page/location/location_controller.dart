@@ -17,9 +17,6 @@ class LocationController extends GetxController {
   final selectedCity = 0.obs;
   final selectedDistrict = 0.obs;
   final selectedBlock = 0.obs;
-  String city = '';
-  String district = '';
-  String dong = '';
 
   List<String> cityname = [];
 
@@ -85,6 +82,10 @@ class LocationController extends GetxController {
   }
 
   Future<void> geoLocation() async {
+    String city = '';
+    String district = '';
+    String dong = '';
+
     isLoading.value = true;
     LocationPermission permission = await Geolocator.requestPermission();
     Position position = await Geolocator.getCurrentPosition(
@@ -94,51 +95,57 @@ class LocationController extends GetxController {
         'https://dapi.kakao.com/v2/local/geo/coord2regioncode.json?x=${position.longitude}&y=${position.latitude}';
 
     final responseGps = await http.get(Uri.parse(gpsUrl), headers: {
-      "authorization": "KakaoAK bcae6ea307f8c461276037fb3cf73651",
+      'authorization': 'KakaoAK bcae6ea307f8c461276037fb3cf73651',
     });
     Map result = json.decode(responseGps.body);
 
-    final list = result['documents'][0]['address_name'].toString().split(' ');
-    city = result['documents'][0]['region_1depth_name'].toString();
-    if (result['documents'][0]['region_2depth_name'].toString().length > 3) {
-      district = result['documents'][0]['region_2depth_name']
-          .toString()
-          .substring(0, 2);
-      dong = result['documents'][0]['region_2depth_name']
-              .toString()
-              .substring(4, 7) +
+    // ignore: avoid_dynamic_calls
+    final address = result['documents'][0];
+
+    // ignore: avoid_dynamic_calls
+    city = address['region_1depth_name'].toString();
+    // ignore: avoid_dynamic_calls
+    if (address['region_2depth_name'].toString().length > 3) {
+      // ignore: avoid_dynamic_calls
+      district =
+          address['region_2depth_name'].toString().split(' ')[0].toString();
+      // ignore: avoid_dynamic_calls, prefer_interpolation_to_compose_strings
+      dong = address['region_2depth_name'].toString().split(' ')[1].toString() +
           " " +
-          result['documents'][0]['region_3depth_name'].toString();
+          // ignore: avoid_dynamic_calls
+          address['region_3depth_name'].toString();
     } else {
-      district = result['documents'][0]['region_2depth_name'].toString();
-      dong = result['documents'][0]['region_3depth_name'].toString();
+      // ignore: avoid_dynamic_calls
+      district = address['region_2depth_name'].toString();
+      // ignore: avoid_dynamic_calls
+      dong = address['region_3depth_name'].toString();
     }
 
-    Future.delayed(const Duration(seconds: 0), () {
-      for (int i = 0; i < 17; i++) {
-        for (int j = 1; j < cities[i].districts.length; j++) {
-          for (int k = 0; k < cities[i].districts[j].blocks.length; k++) {
-            if (cities[i].districts[j].blocks[k].name == dong) {
-              selectedCity.value = i;
-              districts.value = cities[i].districts;
-              blocks.value = districts[j].blocks;
-              selectedDistrict.value = j;
-              selectedBlock.value = k;
-              found = true;
-              isLoading.value = false;
-              break;
-            }
-            if (found) {
-              isLoading.value = false;
-              break;
-            }
+    for (int i = 0; i < 17; i++) {
+      for (int j = 1; j < cities[i].districts.length; j++) {
+        for (int k = 0; k < cities[i].districts[j].blocks.length; k++) {
+          if (cities[i].name == city &&
+              cities[i].districts[j].name == district &&
+              cities[i].districts[j].blocks[k].name == dong) {
+            selectedCity.value = i;
+            districts.value = cities[i].districts;
+            blocks.value = districts[j].blocks;
+            selectedDistrict.value = j;
+            selectedBlock.value = k;
+            found = true;
+            isLoading.value = false;
+            break;
           }
           if (found) {
             isLoading.value = false;
             break;
           }
         }
+        if (found) {
+          isLoading.value = false;
+          break;
+        }
       }
-    });
+    }
   }
 }
