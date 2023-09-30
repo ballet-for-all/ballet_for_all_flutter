@@ -77,47 +77,7 @@ class LocationController extends GetxController {
     selectedBlock.value = i;
   }
 
-  void searchText(String text) async {
-    final loaded = await repository.getLocation();
-
-    Future.delayed(const Duration(seconds: 3), () {
-      for (int i = 0; i < 17; i++) {
-        for (int j = 0; j < cities[i].districts.length; j++) {
-          for (int k = 0; k < cities[i].districts[j].blocks.length; k++) {
-            print(text);
-            if (cities[i].districts[j].blocks[k].name == '$text') {
-              print(cities[i].name);
-              print(j + 1);
-              print(k);
-              selectedCity.value = i;
-              districts.value = cities[i].districts;
-              blocks.value = districts[0].blocks;
-              selectedDistrict.value = j + 1;
-              selectedBlock.value = k;
-              print('있다');
-              found = true;
-              break;
-            }
-            if (found) {
-              break;
-            }
-          }
-          if (found) {
-            break;
-          }
-        }
-      }
-    });
-
-    //print(districts.map((element) => element.name));
-
-    districts.value = cities[0].districts;
-
-    // selectedCity.value = 1;
-    // blocks.value = districts[0].blocks;
-    // selectedDistrict.value = 0;
-    // selectedBlock.value = 1;
-  }
+  void searchText(String text) async {}
 
   void onSettingClick() async {
     Get.toNamed(MainPage.routeName,
@@ -139,17 +99,20 @@ class LocationController extends GetxController {
     Map result = json.decode(responseGps.body);
 
     final list = result['documents'][0]['address_name'].toString().split(' ');
-    if (list.length <= 3) {
-      city = list[0];
-      district = list[1];
-      dong = list[2];
+    city = result['documents'][0]['region_1depth_name'].toString();
+    if (result['documents'][0]['region_2depth_name'].toString().length > 3) {
+      district = result['documents'][0]['region_2depth_name']
+          .toString()
+          .substring(0, 2);
+      dong = result['documents'][0]['region_2depth_name']
+              .toString()
+              .substring(4, 7) +
+          " " +
+          result['documents'][0]['region_3depth_name'].toString();
     } else {
-      city = list[0];
-      district = list[1];
-      dong = list[2] + " " + list[3];
+      district = result['documents'][0]['region_2depth_name'].toString();
+      dong = result['documents'][0]['region_3depth_name'].toString();
     }
-
-    final loaded = await repository.getLocation();
 
     Future.delayed(const Duration(seconds: 0), () {
       for (int i = 0; i < 17; i++) {

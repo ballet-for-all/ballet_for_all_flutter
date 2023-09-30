@@ -91,6 +91,7 @@ class LocationPage extends GetView<LocationController> {
                                     top: _borderSide, right: _borderSide),
                               ),
                               child: ListView.builder(
+                                physics: const NeverScrollableScrollPhysics(),
                                 itemBuilder: (context, i) {
                                   final city = controller.cities[i];
                                   return LocationListItem(
