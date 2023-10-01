@@ -137,6 +137,38 @@ class AcademyPage extends GetView<AcademyController> {
                       description: academy.pricingDescription,
                     ),
                   ),
+                  SliverToBoxAdapter(
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 28),
+                        ElevatedButton(
+                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                            shape: const CircleBorder(
+                              side: BorderSide(color: Color(0xFF999999)),
+                            ),
+                            backgroundColor: Colors.white,
+                            fixedSize: const Size(50, 50),
+                            elevation: 0,
+                          ),
+                          child: const Icon(
+                            Icons.arrow_upward,
+                            size: 25,
+                            color: Color(0xFF999999),
+                          ),
+                        ),
+                        const SizedBox(height: 5),
+                        const Text(
+                          '맨 위로',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Color(0xFFCCCCCC),
+                          ),
+                        ),
+                        const SizedBox(height: 28),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
