@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import '../../repository/city/block.dart';
@@ -87,17 +88,17 @@ class LocationController extends GetxController {
     String dong = '';
 
     isLoading.value = true;
-    LocationPermission permission = await Geolocator.requestPermission();
-    Position position = await Geolocator.getCurrentPosition(
+    final LocationPermission permission = await Geolocator.requestPermission();
+    final Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
 
     String gpsUrl =
         'https://dapi.kakao.com/v2/local/geo/coord2regioncode.json?x=${position.longitude}&y=${position.latitude}';
 
     final responseGps = await http.get(Uri.parse(gpsUrl), headers: {
-      'authorization': 'KakaoAK bcae6ea307f8c461276037fb3cf73651',
+      'authorization': 'KakaoAK ${dotenv.get('kakaoSdkKey')}',
     });
-    Map result = json.decode(responseGps.body);
+    final Map result = json.decode(responseGps.body);
 
     // ignore: avoid_dynamic_calls
     final address = result['documents'][0];
