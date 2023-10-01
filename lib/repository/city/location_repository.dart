@@ -6,7 +6,8 @@ class LocationRepository extends FirestoreCollection {
   Future<List<City>> getLocation() async {
     final snapshot =
         await FirebaseFirestore.instance.collection('location').get();
-    final locations = snapshot.docs.map((doc) => docToMap(doc)).toList();
+    final locations =
+        snapshot.docs.map((doc) => queryDocumentSnapshotToMap(doc)).toList();
     if (locations.length != 1) {
       throw Exception('Location should be only one.');
     }
