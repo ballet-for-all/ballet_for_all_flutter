@@ -9,6 +9,7 @@ import 'academy_controller.dart';
 import 'widget/academy_default_info.dart';
 import 'widget/academy_tab_bar.dart';
 import 'widget/facility_photo_grid.dart';
+import 'widget/pricing_section.dart';
 import 'widget/teacher_profile_list.dart';
 import 'widget/timetable_section.dart';
 
@@ -127,6 +128,9 @@ class AcademyPage extends GetView<AcademyController> {
                       },
                     ),
                   ),
+                  SliverToBoxAdapter(
+                    child: PricingSection(pricing: academy.pricing ?? []),
+                  )
                 ],
               ),
             ),
