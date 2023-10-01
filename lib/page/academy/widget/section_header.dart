@@ -22,11 +22,11 @@ class SectionHeader extends StatelessWidget {
               color: Color(0xFF222222),
             ),
           ),
-          SizedBox(
-            height: 30,
-            child: TextButton(
-              onPressed: onShowAll,
-              child: const Text(
+          InkWell(
+            onTap: onShowAll,
+            child: const Padding(
+              padding: EdgeInsets.all(5),
+              child: Text(
                 '전체보기',
                 style: TextStyle(
                   fontSize: 15,
