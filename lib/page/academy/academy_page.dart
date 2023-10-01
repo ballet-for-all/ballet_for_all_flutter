@@ -103,7 +103,13 @@ class AcademyPage extends GetView<AcademyController> {
                             curve: Curves.ease,
                           );
                         },
-                        onCourceFeeTabPressed: () => debugPrint('수강료'),
+                        onCourceFeeTabPressed: () {
+                          Scrollable.ensureVisible(
+                            controller.pricingKey.currentContext!,
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.ease,
+                          );
+                        },
                       ),
                     ),
                   ),
@@ -130,7 +136,10 @@ class AcademyPage extends GetView<AcademyController> {
                     ),
                   ),
                   SliverToBoxAdapter(
-                    child: PricingSection(pricing: academy.pricing ?? []),
+                    child: PricingSection(
+                      key: controller.pricingKey,
+                      pricing: academy.pricing ?? [],
+                    ),
                   ),
                   SliverToBoxAdapter(
                     child: PricingDescriptionSection(
@@ -142,7 +151,12 @@ class AcademyPage extends GetView<AcademyController> {
                       children: [
                         const SizedBox(height: 28),
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () =>
+                              controller.scrollController.animateTo(
+                            0,
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.ease,
+                          ),
                           style: ElevatedButton.styleFrom(
                             shape: const CircleBorder(
                               side: BorderSide(color: Color(0xFF999999)),

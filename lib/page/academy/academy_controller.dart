@@ -13,6 +13,7 @@ class AcademyController extends GetxController {
   final teacherKey = GlobalKey();
   final facilityKey = GlobalKey();
   final timetableKey = GlobalKey();
+  final pricingKey = GlobalKey();
   final currentTimetableIndex = 0.obs;
 
   @override
@@ -24,11 +25,20 @@ class AcademyController extends GetxController {
     scrollController.addListener(() {
       final teacherOffset = _keyToWidgetOffset(teacherKey);
       final facilityOffset = _keyToWidgetOffset(facilityKey);
-      if (teacherOffset == null || facilityOffset == null) {
+      final timetableOffset = _keyToWidgetOffset(timetableKey);
+      final pricingOffset = _keyToWidgetOffset(pricingKey);
+      if (teacherOffset == null ||
+          facilityOffset == null ||
+          timetableOffset == null ||
+          pricingOffset == null) {
         return;
       }
 
-      if (facilityOffset < 100) {
+      if (pricingOffset < 100) {
+        currentTab.value = 3;
+      } else if (timetableOffset < 100) {
+        currentTab.value = 2;
+      } else if (facilityOffset < 100) {
         currentTab.value = 1;
       } else if (teacherOffset < 100) {
         currentTab.value = 0;
