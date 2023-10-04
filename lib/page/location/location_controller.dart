@@ -88,7 +88,7 @@ class LocationController extends GetxController {
     String dong = '';
 
     isLoading.value = true;
-    final LocationPermission permission = await Geolocator.requestPermission();
+    await Geolocator.requestPermission();
     final Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
 
@@ -135,6 +135,7 @@ class LocationController extends GetxController {
             selectedBlock.value = k;
             found = true;
             isLoading.value = false;
+            Get.offAllNamed(MainPage.routeName, arguments: {'location': dong});
             break;
           }
           if (found) {

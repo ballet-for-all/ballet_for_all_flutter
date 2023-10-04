@@ -14,7 +14,7 @@ class MainController extends GetxController {
   void onInit() async {
     super.onInit();
     AcademyList.value = await academyRepository.listAcademies();
-    final myLocationArg = Get.arguments;
+    final myLocationArg = Get.arguments['location'].toString();
     myLocation.value = myLocationArg;
   }
 

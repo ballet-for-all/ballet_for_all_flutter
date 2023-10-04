@@ -11,7 +11,7 @@ import 'routes/app_pages.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(fileName: ".env");
+  await dotenv.load(fileName: "assets/.env");
   // DependencyInjection.init();
   Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
