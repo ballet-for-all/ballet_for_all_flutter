@@ -32,6 +32,14 @@ Firebase 설정에 필요한 파일은 모두의 발레 구글 드라이브 개�
 - `ios/firebase_app_id_file.json`
 - `ios/Runner/GoogleService-Info.plist`
 
+### Kakao SDK 설정
+
+KaKao SDK 설정에 필요한 파일은 모두의 발레 구글 드라이브 개발 폴더에 있습니다.
+
+파일을 다운받아 아래 경로에 저장합니다.
+
+- `assets/.env`
+
 ### 의존성 설치
 
 ```bash
