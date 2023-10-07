@@ -50,8 +50,8 @@ class MainPage extends GetView<MainController> {
                     color: const Color(0xFF5282FF),
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 30),
+                  child: const Padding(
+                    padding: EdgeInsets.only(left: 30),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -80,17 +80,17 @@ class MainPage extends GetView<MainController> {
               SliverList(
                 delegate: SliverChildBuilderDelegate(
                   (context, index) => AcademyListTile(
-                    id: controller.AcademyList[index].id,
+                    id: controller.academyList[index].id,
                     onPressed: () => controller.onAcademyClick(index),
-                    academyImages: controller.AcademyList[index].images,
-                    academyName: controller.AcademyList[index].name,
-                    academyAddress: controller.AcademyList[index].address,
-                    regularPrice: controller.AcademyList[index].minRegularPrice,
-                    couponPrice: controller.AcademyList[index].minCouponPrice,
+                    academyImages: controller.academyList[index].images,
+                    academyName: controller.academyList[index].name,
+                    academyAddress: controller.academyList[index].address,
+                    regularPrice: controller.academyList[index].minRegularPrice,
+                    couponPrice: controller.academyList[index].minCouponPrice,
                     pieceClassDescription:
-                        controller.AcademyList[index].pieceClassDescription,
+                        controller.academyList[index].pieceClassDescription,
                   ),
-                  childCount: controller.AcademyList.length,
+                  childCount: controller.academyList.length,
                 ),
               ),
             ],
