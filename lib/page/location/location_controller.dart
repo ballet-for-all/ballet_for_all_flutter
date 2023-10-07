@@ -18,10 +18,14 @@ class LocationController extends GetxController {
   final selectedCity = 0.obs;
   final selectedDistrict = 0.obs;
   final selectedBlock = 0.obs;
+  final searchInputTap = false.obs;
+  final searchListText = [].obs;
 
   List<String> cityname = [];
 
   List<Block> blocksOfAllDistricts = [];
+
+  List<String> allLocation = [];
 
   bool found = false;
   final isLoading = false.obs;
@@ -48,6 +52,7 @@ class LocationController extends GetxController {
           .where((district) => district.name.isNotEmpty)
           .map((district) {
         final blocks = [const Block(name: '전체'), ...district.blocks];
+
         return District(name: district.name, blocks: blocks);
       }).toList();
 
@@ -56,6 +61,15 @@ class LocationController extends GetxController {
         districts: districts,
       );
     }).toList();
+
+    for (int i = 0; i < cities.length; i++) {
+      for (int j = 1; j < cities[i].districts.length; j++) {
+        for (int k = 0; k < cities[i].districts[j].blocks.length; k++) {
+          allLocation.add(
+              '${cities[i].name} ${cities[i].districts[j].name} ${cities[i].districts[j].blocks[k].name}');
+        }
+      }
+    }
   }
 
   Future<void> selectCity(int i) async {
@@ -75,11 +89,24 @@ class LocationController extends GetxController {
     selectedBlock.value = i;
   }
 
-  void searchText(String text) async {}
+  void searchText(String text) async {
+    List<String> searchResult = [];
+
+    for (var item in allLocation) {
+      if (item.contains(text)) {
+        searchResult.add(item);
+      }
+    }
+    if (searchResult.isEmpty) {
+      searchListText.value = [text];
+    } else {
+      searchListText.value = searchResult;
+    }
+  }
 
   void onSettingClick() async {
     Get.toNamed(MainPage.routeName,
-        arguments: blocks[selectedBlock.value].name);
+        arguments: {'location': blocks[selectedBlock.value].name});
   }
 
   Future<void> geoLocation() async {
@@ -148,6 +175,25 @@ class LocationController extends GetxController {
           break;
         }
       }
+    }
+  }
+
+  void searchTextSelect(index) {
+    final str = searchListText[index].toString().split(' ');
+    if (str[2] == '전체') {
+      Get.offAllNamed(MainPage.routeName,
+          arguments: {'location': '${str[1]} ${str[2]}'});
+    } else {
+      Get.offAllNamed(MainPage.routeName, arguments: {'location': str[2]});
+    }
+  }
+
+  void searchTextOnChange(String text) {
+    if (text.isEmpty) {
+      searchInputTap.value = false;
+    } else {
+      searchText(text);
+      searchInputTap.value = true;
     }
   }
 }
