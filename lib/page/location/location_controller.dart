@@ -78,8 +78,10 @@ class LocationController extends GetxController {
   void searchText(String text) async {}
 
   void onSettingClick() async {
-    Get.toNamed(MainPage.routeName,
-        arguments: blocks[selectedBlock.value].name);
+    Get.toNamed(
+      MainPage.routeName,
+      arguments: {'location': blocks[selectedBlock.value].name},
+    );
   }
 
   Future<void> geoLocation() async {
@@ -112,7 +114,7 @@ class LocationController extends GetxController {
           address['region_2depth_name'].toString().split(' ')[0].toString();
       // ignore: avoid_dynamic_calls, prefer_interpolation_to_compose_strings
       dong = address['region_2depth_name'].toString().split(' ')[1].toString() +
-          " " +
+          ' ' +
           // ignore: avoid_dynamic_calls
           address['region_3depth_name'].toString();
     } else {

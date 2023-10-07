@@ -12,7 +12,7 @@ class LocationRepository extends FirestoreCollection {
       throw Exception('Location should be only one.');
     }
 
-    final json = await locations.first;
+    final json = locations.first;
     final citiesJson = json['cities'] as List;
     return citiesJson.map((cityJson) => City.fromJson(cityJson)).toList();
   }
