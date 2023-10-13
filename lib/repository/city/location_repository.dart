@@ -5,7 +5,7 @@ import 'city.dart';
 class LocationRepository extends FirestoreCollection {
   Future<List<City>> getLocation() async {
     final snapshot =
-        await FirebaseFirestore.instance.collection('location').get();
+        await FirebaseFirestore.instance.collection('location-v2').get();
     final locations =
         snapshot.docs.map((doc) => queryDocumentSnapshotToMap(doc)).toList();
     if (locations.length != 1) {

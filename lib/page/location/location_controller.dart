@@ -108,21 +108,9 @@ class LocationController extends GetxController {
     // ignore: avoid_dynamic_calls
     city = address['region_1depth_name'].toString();
     // ignore: avoid_dynamic_calls
-    if (address['region_2depth_name'].toString().length > 3) {
-      // ignore: avoid_dynamic_calls
-      district =
-          address['region_2depth_name'].toString().split(' ')[0].toString();
-      // ignore: avoid_dynamic_calls, prefer_interpolation_to_compose_strings
-      dong = address['region_2depth_name'].toString().split(' ')[1].toString() +
-          ' ' +
-          // ignore: avoid_dynamic_calls
-          address['region_3depth_name'].toString();
-    } else {
-      // ignore: avoid_dynamic_calls
-      district = address['region_2depth_name'].toString();
-      // ignore: avoid_dynamic_calls
-      dong = address['region_3depth_name'].toString();
-    }
+    district = address['region_2depth_name'].toString();
+    // ignore: avoid_dynamic_calls
+    dong = address['region_3depth_name'].toString();
 
     for (int i = 0; i < 17; i++) {
       for (int j = 1; j < cities[i].districts.length; j++) {
