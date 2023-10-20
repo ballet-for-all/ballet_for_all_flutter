@@ -62,11 +62,19 @@ class LocationController extends GetxController {
       );
     }).toList();
 
-    for (int i = 0; i < cities.length; i++) {
-      for (int j = 1; j < cities[i].districts.length; j++) {
-        for (int k = 0; k < cities[i].districts[j].blocks.length; k++) {
-          allLocation.add(
-              '${cities[i].name} ${cities[i].districts[j].name} ${cities[i].districts[j].blocks[k].name}');
+    for (final city in cities) {
+      for (final district in city.districts) {
+        for (final block in district.blocks) {
+          //ex - 대구광역시 전체 , 대구광역시 동인동3가
+          if (city.name == '세종특별자치시') {
+            if (block.name != '전체') {
+              allLocation.add('${city.name} ${block.name}');
+            }
+          } else {
+            if (district.name != '전체') {
+              allLocation.add('${city.name} ${district.name} ${block.name}');
+            }
+          }
         }
       }
     }
@@ -98,7 +106,7 @@ class LocationController extends GetxController {
       }
     }
     if (searchResult.isEmpty) {
-      searchListText.value = [text];
+      searchListText.value = [];
     } else {
       searchListText.value = searchResult;
     }
@@ -129,28 +137,23 @@ class LocationController extends GetxController {
 
     // ignore: avoid_dynamic_calls
     final address = result['documents'][0];
-
     // ignore: avoid_dynamic_calls
     city = address['region_1depth_name'].toString();
     // ignore: avoid_dynamic_calls
-    if (address['region_2depth_name'].toString().length > 3) {
-      // ignore: avoid_dynamic_calls
-      district =
-          address['region_2depth_name'].toString().split(' ')[0].toString();
-      // ignore: avoid_dynamic_calls, prefer_interpolation_to_compose_strings
-      dong = address['region_2depth_name'].toString().split(' ')[1].toString() +
-          " " +
-          // ignore: avoid_dynamic_calls
-          address['region_3depth_name'].toString();
-    } else {
-      // ignore: avoid_dynamic_calls
-      district = address['region_2depth_name'].toString();
-      // ignore: avoid_dynamic_calls
-      dong = address['region_3depth_name'].toString();
+    district = address['region_2depth_name'].toString();
+    // ignore: avoid_dynamic_calls
+    dong = address['region_3depth_name'].toString();
+
+    if (district == '') {
+      district = '전체';
     }
 
     for (int i = 0; i < 17; i++) {
-      for (int j = 1; j < cities[i].districts.length; j++) {
+      int jChk = 1;
+      if (cities[i].name == '세종특별자치시') {
+        jChk = 0;
+      }
+      for (int j = jChk; j < cities[i].districts.length; j++) {
         for (int k = 0; k < cities[i].districts[j].blocks.length; k++) {
           if (cities[i].name == city &&
               cities[i].districts[j].name == district &&
@@ -180,11 +183,18 @@ class LocationController extends GetxController {
 
   void searchTextSelect(index) {
     final str = searchListText[index].toString().split(' ');
-    if (str[2] == '전체') {
-      Get.offAllNamed(MainPage.routeName,
-          arguments: {'location': '${str[1]} ${str[2]}'});
+    if (str.length > 2) {
+      if (str[2] == '전체') {
+        Get.offAllNamed(MainPage.routeName, arguments: {'location': str[1]});
+      } else {
+        Get.offAllNamed(MainPage.routeName, arguments: {'location': str[2]});
+      }
     } else {
-      Get.offAllNamed(MainPage.routeName, arguments: {'location': str[2]});
+      if (str[1] == '전체') {
+        Get.offAllNamed(MainPage.routeName, arguments: {'location': str[0]});
+      } else {
+        Get.offAllNamed(MainPage.routeName, arguments: {'location': str[1]});
+      }
     }
   }
 

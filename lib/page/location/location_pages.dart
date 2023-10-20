@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../shared/widget/safe_bottom_button.dart';
-import '../main/main_pages.dart';
 import 'location_controller.dart';
 import './widget/location_list_item.dart';
 
@@ -85,36 +84,40 @@ class LocationPage extends GetView<LocationController> {
                   height: 2,
                   thickness: 1.0,
                 ),
-                Expanded(
-                    child: ListView.builder(
-                  itemBuilder: (_, index) => Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 30, vertical: 20),
-                    child: InkWell(
-                      onTap: () {
-                        controller.searchTextSelect(index);
-                      },
-                      child: controller.searchListText.length == 1
-                          ? const Row(
-                              children: [
-                                Icon(Icons.search),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  '검색한 결과가 없습니다.',
-                                  style: const TextStyle(fontSize: 16),
-                                ),
-                              ],
-                            )
-                          : Text(
+                controller.searchListText.isEmpty
+                    ? const Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                        child: Row(
+                          children: [
+                            Icon(Icons.search),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              '검색한 결과가 없습니다.',
+                              style: TextStyle(fontSize: 16),
+                            ),
+                          ],
+                        ),
+                      )
+                    : Expanded(
+                        child: ListView.builder(
+                        itemBuilder: (_, index) => Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 30, vertical: 20),
+                          child: InkWell(
+                            onTap: () {
+                              controller.searchTextSelect(index);
+                            },
+                            child: Text(
                               controller.searchListText[index].toString(),
                               style: const TextStyle(fontSize: 16),
                             ),
-                    ),
-                  ),
-                  itemCount: controller.searchListText.length,
-                )),
+                          ),
+                        ),
+                        itemCount: controller.searchListText.length,
+                      )),
               ] else ...[
                 !controller.isLoading.value
                     ? Expanded(
