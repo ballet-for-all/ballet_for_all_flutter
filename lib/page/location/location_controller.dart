@@ -113,8 +113,10 @@ class LocationController extends GetxController {
   }
 
   void onSettingClick() async {
+
     Get.toNamed(MainPage.routeName,
         arguments: {'location': blocks[selectedBlock.value].name});
+
   }
 
   Future<void> geoLocation() async {
@@ -147,6 +149,7 @@ class LocationController extends GetxController {
     if (district == '') {
       district = '전체';
     }
+
 
     for (int i = 0; i < 17; i++) {
       int jChk = 1;
