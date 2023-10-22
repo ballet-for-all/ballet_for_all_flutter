@@ -71,7 +71,7 @@ class LocationController extends GetxController {
               allLocation.add('${city.name} ${block.name}');
             }
           } else {
-            if (district.name != '전체') {
+            if (district.name != '전체' && block.name != '전체') {
               allLocation.add('${city.name} ${district.name} ${block.name}');
             }
           }
@@ -84,7 +84,7 @@ class LocationController extends GetxController {
     districts.value = cities[i].districts;
     selectedCity.value = i;
     selectedDistrict.value = -1;
-    selectedBlock.value = -1;
+    blocks.value = [];
   }
 
   Future<void> selectDistrict(int i) async {
@@ -113,10 +113,8 @@ class LocationController extends GetxController {
   }
 
   void onSettingClick() async {
-
     Get.toNamed(MainPage.routeName,
         arguments: {'location': blocks[selectedBlock.value].name});
-
   }
 
   Future<void> geoLocation() async {
@@ -149,7 +147,6 @@ class LocationController extends GetxController {
     if (district == '') {
       district = '전체';
     }
-
 
     for (int i = 0; i < 17; i++) {
       int jChk = 1;
