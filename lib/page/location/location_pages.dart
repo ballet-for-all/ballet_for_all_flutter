@@ -38,7 +38,7 @@ class LocationPage extends GetView<LocationController> {
                     Expanded(
                       child: TextField(
                         onChanged: (text) {
-                          controller.searchText(text);
+                          controller.searchTextOnChange(text);
                         },
                         style: const TextStyle(
                           color: Color(0xFF222222),
@@ -79,95 +79,137 @@ class LocationPage extends GetView<LocationController> {
                   ],
                 ),
               ),
-              !controller.isLoading.value
-                  ? Expanded(
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Container(
-                              decoration: const BoxDecoration(
-                                border: Border(
-                                    top: _borderSide, right: _borderSide),
-                              ),
-                              child: ListView.builder(
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemBuilder: (context, i) {
-                                  final city = controller.cities[i];
-                                  return LocationListItem(
-                                    text: city.name,
-                                    selected:
-                                        controller.selectedCity.value == i,
-                                    onTap: () {
-                                      controller.selectCity(i);
-                                    },
-                                  );
-                                },
-                                itemCount: controller.cities.length,
-                              ),
+              if (controller.searchInputTap.value) ...[
+                const Divider(
+                  height: 2,
+                  thickness: 1.0,
+                ),
+                controller.searchListText.isEmpty
+                    ? const Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                        child: Row(
+                          children: [
+                            Icon(Icons.search),
+                            SizedBox(
+                              width: 10,
                             ),
-                          ),
-                          Expanded(
-                            child: Container(
-                              decoration: const BoxDecoration(
-                                border: Border(top: _borderSide),
-                              ),
-                              child: ListView.builder(
-                                itemBuilder: (context, i) {
-                                  final district = controller.districts[i];
-                                  return LocationListItem(
-                                    text: district.name,
-                                    selected:
-                                        controller.selectedDistrict.value == i,
-                                    onTap: () {
-                                      controller.selectDistrict(i);
-                                    },
-                                  );
-                                },
-                                itemCount: controller.districts.length,
-                              ),
+                            Text(
+                              '검색한 결과가 없습니다.',
+                              style: TextStyle(fontSize: 16),
                             ),
-                          ),
-                          Expanded(
-                            child: Container(
-                              decoration: const BoxDecoration(
-                                border:
-                                    Border(top: _borderSide, left: _borderSide),
-                              ),
-                              child: ListView.builder(
-                                itemBuilder: (context, i) {
-                                  final block = controller.blocks[i];
-                                  return Obx(() => LocationListItem(
-                                        text: block.name,
-                                        selected:
-                                            controller.selectedBlock.value == i,
-                                        onTap: () {
-                                          controller.selectBlock(i);
-                                        },
-                                      ));
-                                },
-                                itemCount: controller.blocks.length,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
-                  : const Expanded(
-                      child: Center(child: CircularProgressIndicator())),
-              controller.selectedBlock.value != -1
-                  ? SafeBottomButton(
-                      onTap: () {
-                        controller.onSettingClick();
-                      },
-                      child: const Text(
-                        '설정하기',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
+                          ],
                         ),
-                      ),
-                    )
-                  : Container(),
+                      )
+                    : Expanded(
+                        child: ListView.builder(
+                        itemBuilder: (_, index) => Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 30, vertical: 20),
+                          child: InkWell(
+                            onTap: () {
+                              controller.searchTextSelect(index);
+                            },
+                            child: Text(
+                              controller.searchListText[index].toString(),
+                              style: const TextStyle(fontSize: 16),
+                            ),
+                          ),
+                        ),
+                        itemCount: controller.searchListText.length,
+                      )),
+              ] else ...[
+                !controller.isLoading.value
+                    ? Expanded(
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Container(
+                                decoration: const BoxDecoration(
+                                  border: Border(
+                                      top: _borderSide, right: _borderSide),
+                                ),
+                                child: ListView.builder(
+                                  itemBuilder: (context, i) {
+                                    final city = controller.cities[i];
+                                    return LocationListItem(
+                                      text: city.name,
+                                      selected:
+                                          controller.selectedCity.value == i,
+                                      onTap: () {
+                                        controller.selectCity(i);
+                                      },
+                                    );
+                                  },
+                                  itemCount: controller.cities.length,
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Container(
+                                decoration: const BoxDecoration(
+                                  border: Border(top: _borderSide),
+                                ),
+                                child: ListView.builder(
+                                  itemBuilder: (context, i) {
+                                    final district = controller.districts[i];
+                                    return LocationListItem(
+                                      text: district.name,
+                                      selected:
+                                          controller.selectedDistrict.value ==
+                                              i,
+                                      onTap: () {
+                                        controller.selectDistrict(i);
+                                      },
+                                    );
+                                  },
+                                  itemCount: controller.districts.length,
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Container(
+                                decoration: const BoxDecoration(
+                                  border: Border(
+                                      top: _borderSide, left: _borderSide),
+                                ),
+                                child: ListView.builder(
+                                  itemBuilder: (context, i) {
+                                    final block = controller.blocks[i];
+                                    return Obx(() => LocationListItem(
+                                          text: block.name,
+                                          selected:
+                                              controller.selectedBlock.value ==
+                                                  i,
+                                          onTap: () {
+                                            controller.selectBlock(i);
+                                          },
+                                        ));
+                                  },
+                                  itemCount: controller.blocks.length,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    : const Expanded(
+                        child: Center(child: CircularProgressIndicator())),
+                controller.selectedBlock.value != -1
+                    ? SafeBottomButton(
+                        onTap: () {
+                          controller.onSettingClick();
+                        },
+                        child: const Text(
+                          '설정하기',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      )
+                    : Container(),
+              ]
             ],
           ),
         ),
