@@ -32,39 +32,53 @@ class _ImageCarouselState extends State<ImageCarousel> {
   }
 
   @override
-  Widget build(BuildContext context) => Stack(
-        children: [
-          CarouselSlider.builder(
-            carouselController: _carouselController,
-            options: CarouselOptions(
-              height: widget.height,
-              viewportFraction: 1,
-              enableInfiniteScroll: false,
-              onPageChanged: (index, _) => setState(() => _imageIndex = index),
-            ),
-            itemCount: widget.images.length,
-            itemBuilder: (context, index, _) => SizedBox(
-              width: widget.width,
-              child: Image.network(
-                widget.images[index],
-                fit: widget.fit,
-              ),
+  Widget build(BuildContext context) => widget.images.isEmpty
+      ? Container(
+          width: widget.width,
+          height: widget.height,
+          color: Colors.grey[300],
+          child: const Center(
+            child: Icon(
+              Icons.image,
+              color: Colors.grey,
+              size: 48,
             ),
           ),
-          Positioned.fill(
-            bottom: 20,
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: DotsIndicator(
-                dotsCount: widget.images.length,
-                position: _imageIndex,
-                decorator: DotsDecorator(
-                  color: Colors.white.withOpacity(0.7),
-                  activeColor: const Color(0xFF222222),
+        )
+      : Stack(
+          children: [
+            CarouselSlider.builder(
+              carouselController: _carouselController,
+              options: CarouselOptions(
+                height: widget.height,
+                viewportFraction: 1,
+                enableInfiniteScroll: false,
+                onPageChanged: (index, _) =>
+                    setState(() => _imageIndex = index),
+              ),
+              itemCount: widget.images.length,
+              itemBuilder: (context, index, _) => SizedBox(
+                width: widget.width,
+                child: Image.network(
+                  widget.images[index],
+                  fit: widget.fit,
                 ),
               ),
             ),
-          ),
-        ],
-      );
+            Positioned.fill(
+              bottom: 20,
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: DotsIndicator(
+                  dotsCount: widget.images.length,
+                  position: _imageIndex,
+                  decorator: DotsDecorator(
+                    color: Colors.white.withOpacity(0.7),
+                    activeColor: const Color(0xFF222222),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        );
 }
