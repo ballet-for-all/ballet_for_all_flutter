@@ -13,7 +13,7 @@
 [FVM](https://fvm.app/) 설치 후 아래 명령어를 실행합니다.
 
 ```bash
-  $ fvm install 3.7.0
+  $ fvm install 3.10.5
   $ fvm flutter pub get
 ```
 
