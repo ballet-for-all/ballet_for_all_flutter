@@ -6,7 +6,7 @@
 
 ## 개발 환경
 
-- Flutter 3.7.0 with FVM
+- Flutter 3.10.5 with FVM
 
 ### 개발 환경 구축 팁
 
